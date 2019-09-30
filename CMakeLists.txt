@@ -19,7 +19,7 @@ file(GLOB SOURCES *.cpp)
 if(MSVC) # get rid of console window
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /subsystem:windows /entry:mainCRTStartup")
 endif(MSVC)
-add_executable("${PROJECT_NAME}" "${SOURCES}")
+add_executable("${PROJECT_NAME}" "${SOURCES}" Rectangle.cpp Rectangle.hpp)
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
 
 # OpenGL

@@ -3,6 +3,7 @@
 #include "Window.hpp"
 #include "Error.hpp"
 #include "Triangle.hpp"
+#include "Rectangle.hpp"
 
 std::vector<Object *> obj;
 
@@ -35,6 +36,7 @@ int main() {
 
     // initialise objects
     obj.emplace_back(new Triangle(ShaderProgram({VertexShader(VERT_VEC3ARR), FragmentShader(FRAG_ORANGE)})));
+    obj.emplace_back(new Rectangle(ShaderProgram({VertexShader(VERT_VEC3ARR), FragmentShader(FRAG_YELLOW)})));
 
     // main loop
     w.Loop(redraw); // infinite loop while window is opened

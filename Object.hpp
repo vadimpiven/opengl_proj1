@@ -17,9 +17,9 @@ public:
 
     explicit
     Object(GLuint shaderProgram) noexcept : VAO(0), VBO(0), EBO(0), shaderProgram(shaderProgram) {
-        glGenBuffers(1, &EBO);
-        glGenBuffers(1, &VBO);
         glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
     }
 
     virtual

@@ -8,7 +8,6 @@
 class Triangle : public Object {
 private:
     std::vector<GLfloat> vertices;
-    std::vector<GLuint> indices;
 
 public:
     Triangle() = delete;

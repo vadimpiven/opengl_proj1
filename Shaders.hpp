@@ -16,7 +16,7 @@ const GLchar FRAG_ORANGE[] = R"~(
 out vec4 color;
 
 void main() {
-    color = vec4(1.0, 0.5, 0.2, 1.0);
+    color = vec4(1, 0.5, 0.2, 1);
 }
 )~";
 
@@ -28,6 +28,16 @@ layout (location = 0) in vec3 position;
 void main()
 {
     gl_Position = vec4(position.x, position.y, position.z, 1.0);
+}
+)~";
+
+const GLchar FRAG_YELLOW[] = R"~(
+#version 330 core
+
+out vec4 color;
+
+void main() {
+    color = vec4(1, 1, 0, 1);
 }
 )~";
 
