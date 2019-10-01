@@ -10,17 +10,13 @@ private:
     std::vector<GLfloat> vertices;
     std::vector<GLuint> indices;
 
-    constexpr static
-    const char uniform[] = "ourColor";
+    GLuint uniformHandler;
 
 public:
     explicit
     Rectangle(const Shader *) noexcept;
 
     void Draw() const noexcept override;
-
-    static
-    void ColorUpdate(GLuint) noexcept;
 };
 
 #endif //OPENGL_RECTANGLE_HPP

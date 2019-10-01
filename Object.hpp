@@ -11,16 +11,6 @@ class Object {
     GLuint VBO;
     GLuint EBO;
 
-    struct UniformHolder {
-        const char *name;
-
-        GLuint handler;
-
-        void (*callback)(GLuint);
-    };
-
-    std::vector<UniformHolder> uniformList;
-
     const Shader *const shader;
 
 protected:
@@ -31,8 +21,6 @@ protected:
     void drawBegin() const noexcept;
 
     void drawEnd() const noexcept;
-
-    void setUniformUpdater(const char *, void(*)(GLuint)) noexcept(false);
 
 public:
     Object() = delete;
