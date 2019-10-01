@@ -13,10 +13,7 @@ Rectangle::Rectangle(GLuint shaderProgram) noexcept : Object(shaderProgram) {
             1, 2, 3,
     };
 
-    // bind buffers
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    constructorBind();
 
     // load vertices
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertices[0]), &vertices[0], GL_STATIC_DRAW);
@@ -25,21 +22,14 @@ Rectangle::Rectangle(GLuint shaderProgram) noexcept : Object(shaderProgram) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
     glEnableVertexAttribArray(0);
 
-    // unbind buffers
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    constructorUnbind();
 }
 
 void Rectangle::Draw() const noexcept {
-    // bind
-    glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
+    drawBind();
 
     // draw
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
-    // unbind
-    glBindVertexArray(0);
-    glUseProgram(0);
+    drawUnbind();
 }

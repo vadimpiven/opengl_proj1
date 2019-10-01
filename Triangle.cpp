@@ -8,9 +8,7 @@ Triangle::Triangle(GLuint shaderProgram) noexcept : Object(shaderProgram) {
             0.0, 0.5, 0.0,
     };
 
-    // bind buffers
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    constructorBind();
 
     // load vertices
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertices[0]), &vertices[0], GL_STATIC_DRAW);
@@ -18,20 +16,14 @@ Triangle::Triangle(GLuint shaderProgram) noexcept : Object(shaderProgram) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
     glEnableVertexAttribArray(0);
 
-    // unbind buffers
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    constructorUnbind();
 }
 
 void Triangle::Draw() const noexcept {
-    // bind
-    glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
+    drawBind();
 
     // draw
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
-    // unbind
-    glBindVertexArray(0);
-    glUseProgram(0);
+    drawUnbind();
 }
