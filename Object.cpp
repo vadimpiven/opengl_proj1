@@ -6,31 +6,30 @@ void Object::constructorBind() const noexcept {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 }
 
-void Object::constructorUnbind() noexcept {
+void Object::constructorUnbind() const noexcept {
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void Object::drawBind() const noexcept {
-    glUseProgram(shaderProgram);
+    shader->Bind();
     glBindVertexArray(VAO);
 }
 
-void Object::drawUnbind() noexcept {
+void Object::drawUnbind() const noexcept {
     glBindVertexArray(0);
-    glUseProgram(0);
+    shader->Unbind();
 }
 
-Object::Object(GLuint shaderProgram) noexcept : VAO(0), VBO(0), EBO(0), shaderProgram(shaderProgram) {
-        glGenVertexArrays(1, &VAO);
-        glGenBuffers(1, &VBO);
-        glGenBuffers(1, &EBO);
+Object::Object(const Shader *const shader) noexcept : VAO(0), VBO(0), EBO(0), shader(shader) {
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
 }
 
 Object::~Object() noexcept {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
-    glDeleteProgram(shaderProgram);
 }

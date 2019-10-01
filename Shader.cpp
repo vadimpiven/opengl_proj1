@@ -1,8 +1,9 @@
 #include <stdexcept>
 
-#include "Shaders.hpp"
+#include "Shader.hpp"
+#include "Error.hpp"
 
-GLuint VertexShader(const GLchar shader[]) noexcept(false) {
+GLuint Shader::vertexShader(const GLchar shader[]) noexcept(false) {
     // compile shader
     GLuint s = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(s, 1, &shader, nullptr);
@@ -19,7 +20,7 @@ GLuint VertexShader(const GLchar shader[]) noexcept(false) {
     throw std::runtime_error(infoLog);
 }
 
-GLuint FragmentShader(const GLchar shader[]) noexcept(false) {
+GLuint Shader::fragmentShader(const GLchar shader[]) noexcept(false) {
     // compile shader
     GLuint s = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(s, 1, &shader, nullptr);
@@ -36,18 +37,19 @@ GLuint FragmentShader(const GLchar shader[]) noexcept(false) {
     throw std::runtime_error(infoLog);
 }
 
-/// creates shader program and deletes shaders
-GLuint ShaderProgram(const std::vector<GLuint>& shaders) noexcept(false) {
+GLuint Shader::shaderProgram(const GLuint vShader, const GLuint fShader) noexcept(false) {
     // link program
     GLuint p = glCreateProgram();
-    for (const auto s: shaders) { glAttachShader(p, s); }
+    glAttachShader(p, vShader);
+    glAttachShader(p, fShader);
     glLinkProgram(p);
 
     // check for error
     GLint success;
     glGetProgramiv(p, GL_LINK_STATUS, &success);
     if (success) {
-        for (const auto s: shaders) { glDeleteShader(s); }
+        glDeleteShader(vShader);
+        glDeleteShader(fShader);
         return p;
     }
 
@@ -55,4 +57,23 @@ GLuint ShaderProgram(const std::vector<GLuint>& shaders) noexcept(false) {
     GLchar infoLog[512];
     glGetProgramInfoLog(p, 512, nullptr, infoLog);
     throw std::runtime_error(infoLog);
+}
+
+Shader::Shader(const GLchar vShader[], const GLchar fShader[]) noexcept(false) {
+    const GLuint vs = vertexShader(vShader);
+    const GLuint fs = fragmentShader(fShader);
+    program = shaderProgram(vs, fs);
+}
+
+void Shader::Bind() const noexcept {
+    glUseProgram(program);
+    glCheckErrors();
+}
+
+void Shader::Unbind() const noexcept {
+    glUseProgram(0);
+}
+
+Shader::~Shader() noexcept {
+    glDeleteProgram(program);
 }

@@ -9,7 +9,7 @@ file(GLOB SHADERS shaders/*.vert shaders/*.frag)
 add_subdirectory(embed)
 add_custom_target("${PROJECT_NAME}_shaders"
         COMMAND embed_shaders "${SHADERS}"
-        BYPRODUCTS Shaders.hpp
+        BYPRODUCTS Shader.hpp
         WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
         COMMENT "Generating embeded shaders"
         VERBATIM)
@@ -19,7 +19,7 @@ file(GLOB SOURCES *.cpp)
 if(MSVC) # get rid of console window
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /subsystem:windows /entry:mainCRTStartup")
 endif(MSVC)
-add_executable("${PROJECT_NAME}" "${SOURCES}" Rectangle.cpp Rectangle.hpp Object.cpp)
+add_executable("${PROJECT_NAME}" "${SOURCES}")
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
 
 # OpenGL

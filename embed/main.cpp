@@ -4,6 +4,45 @@
 
 using namespace std;
 
+const char header[] = R"~(#ifndef OPENGL_SHADER_HPP
+#define OPENGL_SHADER_HPP
+
+#include <vector>
+#include <GL/glew.h>
+
+class Shader {
+    GLuint program;
+
+    static
+    GLuint vertexShader(const GLchar[]) noexcept(false);
+
+    static
+    GLuint fragmentShader(const GLchar[]) noexcept(false);
+
+    static
+    GLuint shaderProgram(GLuint, GLuint) noexcept(false);
+
+public:
+    Shader() = delete;
+
+    Shader(const Shader&) = delete;
+
+    explicit
+    Shader(const GLchar[], const GLchar[]) noexcept(false);
+
+    void Bind() const noexcept;
+
+    void Unbind() const noexcept;
+
+    virtual
+    ~Shader() noexcept;
+};
+)~";
+
+const char footer[] = R"~(
+#endif //OPENGL_SHADER_HPP
+)~";
+
 int main(int argc, char *argv[]) {
     // get semicolon separated list of files
     if (argc != 2) { return 0; }
@@ -13,18 +52,8 @@ int main(int argc, char *argv[]) {
     // locale to allow only english letters in names
     setlocale(LC_ALL, "en_US.utf-8");
 
-    ofstream out("Shaders.hpp");
-    out << "#ifndef OPENGL_SHADERS_HPP" << endl;
-    out << "#define OPENGL_SHADERS_HPP" << endl;
-    out << endl;
-    out << "#include <vector>" << endl;
-    out << "#include <GL/glew.h>" << endl;
-    out << endl;
-    out << "GLuint VertexShader(const GLchar[]) noexcept(false);" << endl;
-    out << endl;
-    out << "GLuint FragmentShader(const GLchar shader[]) noexcept(false);" << endl;
-    out << endl;
-    out << "GLuint ShaderProgram(const std::vector<GLuint>&) noexcept(false);" << endl;
+    ofstream out("Shader.hpp");
+    out << header;
     for (string::size_type pos = list.find(';');
          pos != string::npos;
          list.erase(0, pos + 1), pos = list.find(';')) {
@@ -62,8 +91,7 @@ int main(int argc, char *argv[]) {
 
         in.close();
     }
-    out << endl;
-    out << "#endif //OPENGL_SHADERS_HPP" << endl;
+    out << footer;
     out.close();
     return 0;
 }

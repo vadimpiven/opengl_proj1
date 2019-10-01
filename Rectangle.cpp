@@ -1,6 +1,6 @@
 #include "Rectangle.hpp"
 
-Rectangle::Rectangle(GLuint shaderProgram) noexcept : Object(shaderProgram) {
+Rectangle::Rectangle(const Shader *const shaderProgram) noexcept : Object(shaderProgram) {
     // init data
     vertices = {
             0.8,  -0.5, 0.0,

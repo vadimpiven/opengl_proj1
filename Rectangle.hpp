@@ -14,7 +14,7 @@ public:
     Rectangle() = delete;
 
     explicit
-    Rectangle(GLuint shaderProgram) noexcept;
+    Rectangle(const Shader *) noexcept;
 
     void Draw() const noexcept override;
 };

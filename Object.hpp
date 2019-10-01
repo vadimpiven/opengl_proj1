@@ -3,30 +3,29 @@
 
 #include <GL/glew.h>
 
-#include "Shaders.hpp"
+#include "Shader.hpp"
 
 class Object {
     GLuint VAO;
     GLuint VBO;
     GLuint EBO;
-    GLuint shaderProgram;
+
+    const Shader *const shader;
 
 protected:
     void constructorBind() const noexcept;
 
-    static
-    void constructorUnbind() noexcept;
+    void constructorUnbind() const noexcept;
 
     void drawBind() const noexcept;
 
-    static
-    void drawUnbind() noexcept;
+    void drawUnbind() const noexcept;
 
 public:
     Object() = delete;
 
     explicit
-    Object(GLuint shaderProgram) noexcept;
+    Object(const Shader *) noexcept;
 
     virtual
     void Draw() const noexcept = 0;

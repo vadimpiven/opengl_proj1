@@ -13,7 +13,7 @@ public:
     Triangle() = delete;
 
     explicit
-    Triangle(GLuint shaderProgram) noexcept;
+    Triangle(const Shader *) noexcept;
 
     void Draw() const noexcept override;
 };
