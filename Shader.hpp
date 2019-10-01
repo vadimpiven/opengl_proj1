@@ -19,7 +19,7 @@ class Shader {
 public:
     Shader() = delete;
 
-    Shader(const Shader&) = delete;
+    Shader(const Shader &) = delete;
 
     explicit
     Shader(const GLchar[], const GLchar[]) noexcept(false);
@@ -27,6 +27,8 @@ public:
     void Bind() const noexcept;
 
     void Unbind() const noexcept;
+
+    GLuint GetUniform(const GLchar *) const noexcept(false);
 
     virtual
     ~Shader() noexcept;
@@ -58,8 +60,10 @@ const GLchar FRAG_YELLOW[] = R"~(
 
 out vec4 color;
 
+uniform float ourColor;
+
 void main() {
-    color = vec4(1, 1, 0, 1);
+    color = vec4(ourColor, ourColor, 0, 1);
 }
 )~";
 

@@ -10,8 +10,6 @@ private:
     std::vector<GLfloat> vertices;
 
 public:
-    Triangle() = delete;
-
     explicit
     Triangle(const Shader *) noexcept;
 

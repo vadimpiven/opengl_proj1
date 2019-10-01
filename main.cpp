@@ -30,19 +30,26 @@ void redraw() noexcept {
 }
 
 int main() {
+    std::vector<Shader *> sh;
+
     // create window
     Window w(800, 600, "OpenGL Project One"); // create new window
     w.SetKeyCallback(keyCallback); // set user input processor
 
     // initialise objects
-    obj.emplace_back(new Triangle(new Shader(VERT_VEC3ARR, FRAG_ORANGE)));
-    obj.emplace_back(new Rectangle(new Shader(VERT_VEC3ARR, FRAG_YELLOW)));
+    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_ORANGE));
+    obj.emplace_back(new Triangle(sh.back()));
+
+    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_YELLOW));
+    obj.emplace_back(new Rectangle(sh.back()));
 
     // main loop
-    w.Loop(redraw); // infinite loop while window is opened
+    w.Loop(redraw); // infinite loop while window is open
 
     // clear resources
     for (const auto &o: obj) { delete o; }
+    for (const auto &s: sh) { delete s; }
+
     w.Destroy();
     return 0;
 }

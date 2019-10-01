@@ -4,9 +4,7 @@
 
 using namespace std;
 
-const char header[] = R"~(#ifndef OPENGL_SHADER_HPP
-#define OPENGL_SHADER_HPP
-
+const char header[] = R"~(
 #include <vector>
 #include <GL/glew.h>
 
@@ -25,7 +23,7 @@ class Shader {
 public:
     Shader() = delete;
 
-    Shader(const Shader&) = delete;
+    Shader(const Shader &) = delete;
 
     explicit
     Shader(const GLchar[], const GLchar[]) noexcept(false);
@@ -34,13 +32,11 @@ public:
 
     void Unbind() const noexcept;
 
+    GLuint GetUniform(const GLchar *) const noexcept(false);
+
     virtual
     ~Shader() noexcept;
 };
-)~";
-
-const char footer[] = R"~(
-#endif //OPENGL_SHADER_HPP
 )~";
 
 int main(int argc, char *argv[]) {
@@ -53,6 +49,8 @@ int main(int argc, char *argv[]) {
     setlocale(LC_ALL, "en_US.utf-8");
 
     ofstream out("Shader.hpp");
+    out << "#ifndef OPENGL_SHADER_HPP" << endl;
+    out << "#define OPENGL_SHADER_HPP" << endl;
     out << header;
     for (string::size_type pos = list.find(';');
          pos != string::npos;
@@ -91,7 +89,7 @@ int main(int argc, char *argv[]) {
 
         in.close();
     }
-    out << footer;
+    out << endl << "#endif //OPENGL_SHADER_HPP" << endl;
     out.close();
     return 0;
 }

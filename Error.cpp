@@ -1,4 +1,5 @@
 #include <stdexcept>
+
 #include <GL/glew.h>
 
 void glCheckErrors() noexcept(false) {

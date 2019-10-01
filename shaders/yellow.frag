@@ -2,6 +2,8 @@
 
 out vec4 color;
 
+uniform float ourColor;
+
 void main() {
-    color = vec4(1, 1, 0, 1);
+    color = vec4(ourColor, ourColor, 0, 1);
 }

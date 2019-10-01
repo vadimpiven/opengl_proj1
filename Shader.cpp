@@ -1,7 +1,6 @@
 #include <stdexcept>
 
 #include "Shader.hpp"
-#include "Error.hpp"
 
 GLuint Shader::vertexShader(const GLchar shader[]) noexcept(false) {
     // compile shader
@@ -67,7 +66,6 @@ Shader::Shader(const GLchar vShader[], const GLchar fShader[]) noexcept(false) {
 
 void Shader::Bind() const noexcept {
     glUseProgram(program);
-    glCheckErrors();
 }
 
 void Shader::Unbind() const noexcept {
@@ -76,4 +74,10 @@ void Shader::Unbind() const noexcept {
 
 Shader::~Shader() noexcept {
     glDeleteProgram(program);
+}
+
+GLuint Shader::GetUniform(const GLchar *uniform) const noexcept(false) {
+    const GLint u = glGetUniformLocation(program, uniform);
+    if (u != -1) { return static_cast<GLuint>(u); }
+    throw std::runtime_error("uniform not exists");
 }

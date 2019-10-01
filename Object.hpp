@@ -1,25 +1,38 @@
 #ifndef OPENGL_OBJECT_HPP
 #define OPENGL_OBJECT_HPP
 
-#include <GL/glew.h>
+#include <vector>
 
 #include "Shader.hpp"
+#include <GL/glew.h>
 
 class Object {
     GLuint VAO;
     GLuint VBO;
     GLuint EBO;
 
+    struct UniformHolder {
+        const char *name;
+
+        GLuint handler;
+
+        void (*callback)(GLuint);
+    };
+
+    std::vector<UniformHolder> uniformList;
+
     const Shader *const shader;
 
 protected:
-    void constructorBind() const noexcept;
+    void constructorBegin() const noexcept;
 
-    void constructorUnbind() const noexcept;
+    void constructorEnd() const noexcept;
 
-    void drawBind() const noexcept;
+    void drawBegin() const noexcept;
 
-    void drawUnbind() const noexcept;
+    void drawEnd() const noexcept;
+
+    void setUniformUpdater(const char *, void(*)(GLuint)) noexcept(false);
 
 public:
     Object() = delete;
