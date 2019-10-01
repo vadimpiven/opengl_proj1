@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(opengl CXX)
+project(opengl C CXX)
 
 # set global variables
 set(CMAKE_CXX_STANDARD 17)
@@ -21,6 +21,25 @@ if(MSVC) # get rid of console window
 endif(MSVC)
 add_executable("${PROJECT_NAME}" "${SOURCES}")
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
+
+# Assimp
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+add_subdirectory(assimp) # https://github.com/assimp/assimp
+target_include_directories("${PROJECT_NAME}" PRIVATE assimp/include)
+target_link_libraries("${PROJECT_NAME}" assimp)
+
+# SOIL
+add_subdirectory(soil) # https://github.com/paralin/soil
+target_include_directories("${PROJECT_NAME}" PRIVATE soil/inc)
+target_link_libraries("${PROJECT_NAME}" soil)
+
+# GLM
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(GLM_TEST_ENABLE OFF CACHE BOOL "" FORCE)
+add_subdirectory(glm) # https://github.com/g-truc/glm
+target_include_directories("${PROJECT_NAME}" PRIVATE glm/glm)
+target_link_libraries("${PROJECT_NAME}" glm_static)
 
 # OpenGL
 find_package(opengl 3.3 REQUIRED)
