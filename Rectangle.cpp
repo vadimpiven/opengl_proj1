@@ -16,7 +16,6 @@ Rectangle::Rectangle(const Shader *const shaderProgram) noexcept : Object(shader
             0, 1, 3,
             1, 2, 3,
     };
-
     uniformHandler = shaderProgram->GetUniform("ourColor");
 
     // load vertices
@@ -37,5 +36,6 @@ void Rectangle::Draw() const noexcept {
     glUniform1f(uniformHandler, greenValue);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
     drawEnd();
 }
