@@ -14,6 +14,9 @@ class Object {
     const Shader *const shader;
 
 protected:
+    std::vector<GLfloat> vertices;
+    std::vector<GLuint> indices;
+
     void constructorBegin() const noexcept;
 
     void constructorEnd() const noexcept;
@@ -29,7 +32,7 @@ public:
     Object(const Shader *) noexcept;
 
     virtual
-    void Draw() const noexcept = 0;
+    void Draw() noexcept = 0;
 
     virtual
     ~Object() noexcept;

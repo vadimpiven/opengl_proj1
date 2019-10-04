@@ -1,4 +1,6 @@
 #include <stdexcept>
+#include <chrono>
+#include <thread>
 
 #include "Window.hpp"
 
@@ -38,7 +40,7 @@ void Window::resizeWindow() noexcept {
 
 Window::Window(const GLsizei width, const GLsizei height, const char *title) noexcept {
     initGLFW(); // allows to create window
-    glfwSwapInterval(1); // force 60 frames per second
+    glfwSwapInterval(1); // enable vertical synchronisation
     window = glfwCreateWindow(
             width, // width
             height, // height
@@ -68,7 +70,17 @@ void Window::SetCursorPosCallback(GLFWcursorposfun callback) noexcept {
 }
 
 void Window::Loop(void(*redraw)()) noexcept {
+    const unsigned char fps = 25;
+    std::chrono::milliseconds span(1000 / fps);
+    auto startTime = std::chrono::system_clock::now();
+    std::chrono::duration<long long int, std::milli> workTime{};
     while (!glfwWindowShouldClose(window)) { // while window is not closed
+        workTime = std::chrono::duration_cast<std::chrono::milliseconds>(
+                startTime - std::chrono::system_clock::now());
+        if (workTime < span) {
+            std::this_thread::sleep_for(span - workTime);
+        }
+        startTime = std::chrono::system_clock::now();
         glfwPollEvents(); // wait for user actions
         redraw(); // update image
         glfwSwapBuffers(window); // show new image

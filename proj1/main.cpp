@@ -4,6 +4,7 @@
 #include "Error.hpp"
 #include "Triangle.hpp"
 #include "Rectangle.hpp"
+#include "Cone.hpp"
 
 std::vector<Object *> obj;
 
@@ -37,11 +38,14 @@ int main() {
     w.SetKeyCallback(keyCallback); // set user input processor
 
     // initialise objects
-    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_ORANGE));
-    obj.emplace_back(new Triangle(sh.back()));
+//    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_ORANGE));
+//    obj.emplace_back(new Triangle(sh.back()));
+//
+//    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_YELLOW));
+//    obj.emplace_back(new Rectangle(sh.back()));
 
-    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_YELLOW));
-    obj.emplace_back(new Rectangle(sh.back()));
+    sh.emplace_back(new Shader(VERT_CONE, FRAG_CONE));
+    obj.emplace_back(new Cone(sh.back()));
 
     // main loop
     w.Loop(redraw); // infinite loop while window is open

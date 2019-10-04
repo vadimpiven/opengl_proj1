@@ -34,6 +34,33 @@ public:
     ~Shader() noexcept;
 };
 
+const GLchar FRAG_CONE[] = R"~(
+#version 330 core
+
+in vec3 myColor;
+out vec4 color;
+
+void main() {
+    color = vec4(myColor, 1.0f);
+})~";
+
+const GLchar VERT_CONE[] = R"~(
+#version 330 core
+
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec3 color;
+
+out vec3 myColor;
+
+uniform mat4 transform;
+
+void main()
+{
+    gl_Position = transform * vec4(position, 1.0f);
+    myColor = color;
+}
+)~";
+
 const GLchar FRAG_ORANGE[] = R"~(
 #version 330 core
 
