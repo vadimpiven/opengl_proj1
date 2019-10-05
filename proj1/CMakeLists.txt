@@ -22,17 +22,17 @@ endif(WIN32)
 add_executable("${PROJECT_NAME}" WIN32 "${SOURCES}")
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
 
-# Assimp - load 3D objects
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-add_subdirectory(../assimp "${PROJECT_BINARY_DIR}/assimp") # https://github.com/assimp/assimp
-target_include_directories("${PROJECT_NAME}" PRIVATE ../assimp/include)
-target_link_libraries("${PROJECT_NAME}" assimp)
-
-# SOIL - open textures
-add_subdirectory(../soil "${PROJECT_BINARY_DIR}/soil") # https://github.com/paralin/soil
-target_include_directories("${PROJECT_NAME}" PRIVATE ../soil/inc)
-target_link_libraries("${PROJECT_NAME}" soil)
+## Assimp - load 3D objects
+#set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+#set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+#add_subdirectory(../assimp "${PROJECT_BINARY_DIR}/assimp") # https://github.com/assimp/assimp
+#target_include_directories("${PROJECT_NAME}" PRIVATE ../assimp/include)
+#target_link_libraries("${PROJECT_NAME}" assimp)
+#
+## SOIL - open textures
+#add_subdirectory(../soil "${PROJECT_BINARY_DIR}/soil") # https://github.com/paralin/soil
+#target_include_directories("${PROJECT_NAME}" PRIVATE ../soil/inc)
+#target_link_libraries("${PROJECT_NAME}" soil)
 
 # GLM - GLSL-like types
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)

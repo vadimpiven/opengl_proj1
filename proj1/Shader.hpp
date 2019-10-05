@@ -52,45 +52,13 @@ layout (location = 1) in vec3 color;
 
 out vec3 myColor;
 
-uniform mat4 transform;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
 
-void main()
-{
-    gl_Position = transform * vec4(position, 1.0f);
+void main() {
+    gl_Position = projection * view * model * vec4(position, 1.0f);
     myColor = color;
-}
-)~";
-
-const GLchar FRAG_ORANGE[] = R"~(
-#version 330 core
-
-out vec4 color;
-
-void main() {
-    color = vec4(1, 0.5, 0.2, 1);
-}
-)~";
-
-const GLchar VERT_VEC3ARR[] = R"~(
-#version 330 core
-
-layout (location = 0) in vec3 position;
-
-void main()
-{
-    gl_Position = vec4(position.x, position.y, position.z, 1.0);
-}
-)~";
-
-const GLchar FRAG_YELLOW[] = R"~(
-#version 330 core
-
-out vec4 color;
-
-uniform float ourColor;
-
-void main() {
-    color = vec4(ourColor, ourColor, 0, 1);
 }
 )~";
 

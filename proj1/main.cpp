@@ -2,8 +2,6 @@
 
 #include "Window.hpp"
 #include "Error.hpp"
-#include "Triangle.hpp"
-#include "Rectangle.hpp"
 #include "Cone.hpp"
 
 std::vector<Object *> obj;
@@ -22,8 +20,7 @@ void redraw() noexcept {
 
     // clear window with given color
     glClearColor(0.2, 0.3, 0.3, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glCheckErrors();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT  | GL_STENCIL_BUFFER_BIT);
 
     // draw everything
     for (const auto &o: obj) { o->Draw(); }
@@ -34,18 +31,14 @@ int main() {
     std::vector<Shader *> sh;
 
     // create window
-    Window w(800, 600, "OpenGL Project One"); // create new window
+    GLsizei width = 800, height = 600;
+    Window w(width, height, "OpenGL Project One"); // create new window
+    auto projection = glm::perspective(45.0f, (float)width / (float)height, 0.1f, 100.0f);
     w.SetKeyCallback(keyCallback); // set user input processor
 
     // initialise objects
-//    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_ORANGE));
-//    obj.emplace_back(new Triangle(sh.back()));
-//
-//    sh.emplace_back(new Shader(VERT_VEC3ARR, FRAG_YELLOW));
-//    obj.emplace_back(new Rectangle(sh.back()));
-
     sh.emplace_back(new Shader(VERT_CONE, FRAG_CONE));
-    obj.emplace_back(new Cone(sh.back()));
+    obj.emplace_back(new Cone(sh.back(), projection));
 
     // main loop
     w.Loop(redraw); // infinite loop while window is open

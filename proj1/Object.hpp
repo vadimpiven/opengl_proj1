@@ -2,6 +2,8 @@
 #define OPENGL_OBJECT_HPP
 
 #include <vector>
+#include <glm.hpp>
+#include <gtc/type_ptr.hpp>
 
 #include "Shader.hpp"
 #include <GL/glew.h>
@@ -14,6 +16,13 @@ class Object {
     const Shader *const shader;
 
 protected:
+    glm::mat4 model;
+    GLint modelHandler;
+    glm::mat4 view;
+    GLint viewHandler;
+    glm::mat4 projection;
+    GLint projectionHandler;
+
     std::vector<GLfloat> vertices;
     std::vector<GLuint> indices;
 
@@ -29,7 +38,7 @@ public:
     Object() = delete;
 
     explicit
-    Object(const Shader *) noexcept;
+    Object(const Shader *, glm::mat4) noexcept;
 
     virtual
     void Draw() noexcept = 0;

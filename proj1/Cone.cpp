@@ -1,6 +1,5 @@
 #include <cmath>
 #include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
 
 #include "Cone.hpp"
 #include <GLFW/glfw3.h>
@@ -49,10 +48,13 @@ glm::dvec3 hsv2rgb(double angle) {
     }
 }
 
-Cone::Cone(const Shader *const shaderProgram) noexcept : Object(shaderProgram) {
+Cone::Cone(const Shader *const shaderProgram, const glm::mat4 projection) noexcept
+        : Object(shaderProgram, projection) {
     constructorBegin();
 
-    uniformHandler = shaderProgram->GetUniform("transform");
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -1.5f));
+    view = glm::rotate(view, 0.5f, glm::vec3(1.0, 0.0, 0.0));
+    view = glm::translate(view, glm::vec3(0.0f, -0.15f, 0.0f));
 
     const GLfloat h = 0.6, r = 0.5;
     const unsigned n = 60, s = 6;
@@ -128,15 +130,12 @@ Cone::Cone(const Shader *const shaderProgram) noexcept : Object(shaderProgram) {
 }
 
 void Cone::Draw() noexcept {
-    static glm::mat4 transform = glm::rotate(glm::mat4(1.0f), -0.5f, glm::vec3(1.0, 0.0, 0.0));
+    GLfloat time = glfwGetTime();
+    model = glm::rotate(glm::mat4(1.0f), time * -0.5f, glm::vec3(0.0, 1.0, 0.0));
+
     drawBegin();
 
-    transform = glm::rotate(transform, 0.01f, glm::vec3(0.0, 1.0, 0.0));
-    glUniformMatrix4fv(uniformHandler, 1, GL_FALSE, glm::value_ptr(transform));
-
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (GLvoid *) (0 * sizeof(indices[0])));
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     drawEnd();
 }

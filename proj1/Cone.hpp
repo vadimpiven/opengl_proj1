@@ -1,16 +1,12 @@
 #ifndef OPENGL_CONE_HPP
 #define OPENGL_CONE_HPP
 
-#include <glm.hpp>
-
 #include "Object.hpp"
 
 class Cone : public Object {
-    GLuint uniformHandler;
-
 public:
     explicit
-    Cone(const Shader *) noexcept;
+    Cone(const Shader *, glm::mat4) noexcept;
 
     void Draw() noexcept override;
 };
