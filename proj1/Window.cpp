@@ -35,6 +35,7 @@ void Window::resizeWindow() noexcept {
     glfwGetFramebufferSize(window, &width, &height); // get actual window size
     glViewport(0, 0, width, height); // set window position and size
     glEnable(GL_DEPTH_TEST); // enable depth check (for correct 3D redraw)
+    glEnable(GL_STENCIL_TEST); // enable stencil check
 }
 
 Window::Window(const GLsizei width, const GLsizei height, const char *title) noexcept {
