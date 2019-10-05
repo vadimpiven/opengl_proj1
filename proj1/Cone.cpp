@@ -48,13 +48,12 @@ glm::dvec3 hsv2rgb(double angle) {
     }
 }
 
-Cone::Cone(const Shader *const shaderProgram, const glm::mat4 projection) noexcept
+Cone::Cone(const Shader *const shaderProgram, const glm::mat4 projection = glm::mat4(1.0f)) noexcept
         : Object(shaderProgram, projection) {
     constructorBegin();
 
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -1.5f));
-    view = glm::rotate(view, 0.5f, glm::vec3(1.0, 0.0, 0.0));
-    view = glm::translate(view, glm::vec3(0.0f, -0.15f, 0.0f));
+    view = glm::translate(view, glm::vec3(0.0f, -0.15f, -1.5f)); // move back and down
+    view = glm::rotate(view, 0.5f, glm::vec3(1.0, 0.0, 0.0)); // tilt front
 
     const GLfloat h = 0.6, r = 0.5;
     const unsigned n = 60, s = 6;
@@ -130,11 +129,9 @@ Cone::Cone(const Shader *const shaderProgram, const glm::mat4 projection) noexce
 }
 
 void Cone::Draw() noexcept {
-    GLfloat time = glfwGetTime();
-    model = glm::rotate(glm::mat4(1.0f), time * -0.5f, glm::vec3(0.0, 1.0, 0.0));
-
     drawBegin();
 
+    model = glm::rotate(glm::mat4(1.0f), static_cast<GLfloat>(glfwGetTime()) * -0.5f, glm::vec3(0.0, 1.0, 0.0));
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (GLvoid *) (0 * sizeof(indices[0])));
 
     drawEnd();

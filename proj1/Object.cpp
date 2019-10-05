@@ -31,7 +31,7 @@ void Object::drawEnd() const noexcept {
     shader->Unbind();
 }
 
-Object::Object(const Shader *const shader, const glm::mat4 projection) noexcept
+Object::Object(const Shader *const shader, const glm::mat4 projection = glm::mat4(1.0f)) noexcept
         : VAO(0), VBO(0), EBO(0), shader(shader),
           model(glm::mat4(1.0f)), modelHandler(-1),
           view(glm::mat4(1.0f)), viewHandler(-1),
