@@ -16,10 +16,8 @@ void Object::drawBegin() const noexcept {
     shader->Bind();
     glBindVertexArray(VAO);
 
-    glUniformMatrix4fv(modelHandler, 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(placementHandler, 1, GL_FALSE, glm::value_ptr(*placement));
-    glUniformMatrix4fv(viewHandler, 1, GL_FALSE, glm::value_ptr(*view));
-    glUniformMatrix4fv(projectionHandler, 1, GL_FALSE, glm::value_ptr(*projection));
+    glm::mat4 transform = (*projection) * (*view) * (*placement) * model;
+    glUniformMatrix4fv(transformHandler, 1, GL_FALSE, glm::value_ptr(transform));
 }
 
 void Object::drawEnd() const noexcept {
@@ -34,18 +32,15 @@ Object::Object(
         const glm::mat4 *const projection
 ) noexcept
         : VAO(0), VBO(0), EBO(0), shader(shader),
-          model(glm::mat4(1.0f)), modelHandler(),
-          placement(placement), placementHandler(0),
-          view(view), viewHandler(0),
-          projection(projection), projectionHandler(0) {
+          model(glm::mat4(1.0f)),
+          placement(placement), view(view),
+          projection(projection),
+          transformHandler(0) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
-    modelHandler = shader->GetUniform("model");
-    placementHandler = shader->GetUniform("placement");
-    viewHandler = shader->GetUniform("view");
-    projectionHandler = shader->GetUniform("projection");
+    transformHandler = shader->GetUniform("transform");
 }
 
 Object::~Object() noexcept {

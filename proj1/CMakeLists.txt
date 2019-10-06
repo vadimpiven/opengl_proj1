@@ -19,7 +19,7 @@ file(GLOB SOURCES *.cpp)
 if(WIN32) # get rid of console window
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /subsystem:windows /entry:mainCRTStartup")
 endif(WIN32)
-add_executable("${PROJECT_NAME}" WIN32 "${SOURCES}")
+add_executable("${PROJECT_NAME}" WIN32 "${SOURCES}" Cube.cpp Cube.hpp)
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
 
 ## Assimp - load 3D objects

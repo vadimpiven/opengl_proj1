@@ -34,32 +34,51 @@ public:
     ~Shader() noexcept;
 };
 
-const GLchar FRAG_CONE[] = R"~(
+const GLchar FRAG_RGB[] = R"~(
 #version 330 core
 
-in vec3 myColor;
+in vec3 RGB;
+
 out vec4 color;
 
 void main() {
-    color = vec4(myColor, 1.0f);
+    color = vec4(RGB, 1.0f);
 })~";
 
-const GLchar VERT_CONE[] = R"~(
+const GLchar FRAG_WHITE[] = R"~(
 #version 330 core
 
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec3 color;
-
-out vec3 myColor;
-
-uniform mat4 model;
-uniform mat4 placement;
-uniform mat4 view;
-uniform mat4 projection;
+out vec4 color;
 
 void main() {
-    gl_Position = projection * view * placement * model * vec4(position, 1.0f);
-    myColor = color;
+    color = vec4(1.0f);
+})~";
+
+const GLchar VERT_XYZ[] = R"~(
+#version 330 core
+
+layout (location = 0) in vec3 inXYZ;
+
+uniform mat4 transform;
+
+void main() {
+    gl_Position = transform * vec4(inXYZ, 1.0f);
+}
+)~";
+
+const GLchar VERT_XYZ_RGB[] = R"~(
+#version 330 core
+
+layout (location = 0) in vec3 inXYZ;
+layout (location = 1) in vec3 inRGB;
+
+out vec3 RGB;
+
+uniform mat4 transform;
+
+void main() {
+    gl_Position = transform * vec4(inXYZ, 1.0f);
+    RGB = inRGB;
 }
 )~";
 

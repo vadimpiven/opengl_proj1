@@ -59,7 +59,7 @@ void Camera::ProcessMouseMovement(
         GLfloat xOffset, GLfloat yOffset,
         const GLboolean constrainPitch
 ) noexcept {
-    const GLfloat SENSITIVITY = 0.25f;
+    const GLfloat SENSITIVITY = 0.18f;
     xOffset *= SENSITIVITY;
     yOffset *= SENSITIVITY;
 

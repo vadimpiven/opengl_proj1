@@ -53,8 +53,6 @@ Cone::Cone(
         const glm::mat4 *const projection
 ) noexcept
         : Object(shaderProgram, placement, view, projection) {
-    constructorBegin();
-
     const GLfloat h = 0.6, r = 0.5;
     const unsigned n = 60, s = 6;
     vertices.resize(s * (n + 2));
@@ -116,6 +114,8 @@ Cone::Cone(
     indices[j++] = 2;
     indices[j++] = n + 1;
 
+    constructorBegin();
+
     // load vertices
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertices[0]), &vertices[0], GL_STATIC_DRAW);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(indices[0]), &indices[0], GL_STATIC_DRAW);
@@ -129,9 +129,10 @@ Cone::Cone(
 }
 
 void Cone::Draw(const GLfloat time, GLfloat) noexcept {
+    model = glm::rotate(glm::mat4(1.0f), time * -0.5f, glm::vec3(0.0, 1.0, 0.0));
+
     drawBegin();
 
-    model = glm::rotate(glm::mat4(1.0f), time * -0.5f, glm::vec3(0.0, 1.0, 0.0));
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (GLvoid *) (0 * sizeof(indices[0])));
 
     drawEnd();

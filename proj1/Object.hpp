@@ -18,10 +18,7 @@ class Object {
 
     const Shader *const shader;
 
-    GLuint modelHandler;
-    GLuint placementHandler;
-    GLuint viewHandler;
-    GLuint projectionHandler;
+    GLuint transformHandler;
 
     const glm::mat4 *const placement;
     const glm::mat4 *const view;
