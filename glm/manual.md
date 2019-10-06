@@ -1414,10 +1414,10 @@ To include an extension, we only need to include the dedicated header file. Once
 
 int foo()
 {
-    glm::vec4 Position = glm::vec4(glm:: vec3(0.0f), 1.0f);
+    glm::vec4 position = glm::vec4(glm:: vec3(0.0f), 1.0f);
     glm::mat4 Model = glm::translate(glm::mat4(1.0f), glm::vec3(1.0f));
 
-    glm::vec4 Transformed = Model * Position;
+    glm::vec4 Transformed = Model * position;
     ...
 
     return 0;
@@ -2268,7 +2268,7 @@ namespace detail // glm::detail namespace is for implementation detail
 
 * OpenGL 4.3 core specification
 * [GLSL 4.30 specification](http://www.opengl.org/registry/doc/GLSLangSpec.4.30.7.diff.pdf)
-![](media/image21.png){width="2.859722222222222in" height="1.6083333333333334in"}- [*GLU 1.3 specification*](http://www.opengl.org/documentation/specs/glu/glu1_3.pdf)
+![](media/image21.png){WIDTH="2.859722222222222in" height="1.6083333333333334in"}- [*GLU 1.3 specification*](http://www.opengl.org/documentation/specs/glu/glu1_3.pdf)
 
 ### <a name="section10_2"></a> 10.2. External links
 

@@ -24,7 +24,7 @@ public:
 
     void SetCursorPosCallback(GLFWcursorposfun) noexcept;
 
-    void Loop(void(*)()) noexcept;
+    void Loop(void(*)(GLfloat, GLfloat)) noexcept;
 
     void Destroy() noexcept;
 };

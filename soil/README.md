@@ -35,7 +35,7 @@ Writeable Image Formats:
   *   Can decompress images from RAM (e.g. via [PhysicsFS][3] or similar) into an OpenGL texture (same features as regular 2D textures, above) 
   *   Can load cube maps directly into an OpenGL texture (same features as regular 2D textures, above) 
   *   Can take six image files directly into an OpenGL cube map texture 
-  *   Can take a single image file where width = 6*height (or vice versa), split it into an OpenGL cube map texture 
+  *   Can take a single image file where WIDTH = 6*height (or vice versa), split it into an OpenGL cube map texture 
   *   No external dependencies 
   *   Tiny 
   *   Cross platform (Windows, *nix, Mac OS X) 

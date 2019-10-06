@@ -42,7 +42,7 @@ Window::Window(const GLsizei width, const GLsizei height, const char *title) noe
     initGLFW(); // allows to create window
     glfwSwapInterval(1); // enable vertical synchronisation
     window = glfwCreateWindow(
-            width, // width
+            width, // WIDTH
             height, // height
             title, // title
             nullptr, // monitor where window is shown
@@ -66,13 +66,20 @@ void Window::SetKeyCallback(GLFWkeyfun callback) noexcept {
 }
 
 void Window::SetCursorPosCallback(GLFWcursorposfun callback) noexcept {
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // capture cursor
     glfwSetCursorPosCallback(window, callback); // listen for user actions
 }
 
-void Window::Loop(void(*redraw)()) noexcept {
+void Window::Loop(void(*redraw)(GLfloat, GLfloat)) noexcept {
+    GLfloat deltaTime = 0.0f, lastFrame = 0.0f, currentFrame;
+
     while (!glfwWindowShouldClose(window)) { // while window is not closed
-        glfwPollEvents(); // wait for user actions
-        redraw(); // update image
+        currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
+        glfwPollEvents(); // check for user actions
+        redraw(currentFrame, deltaTime); // update image
         glfwSwapBuffers(window); // show new image
     }
 }

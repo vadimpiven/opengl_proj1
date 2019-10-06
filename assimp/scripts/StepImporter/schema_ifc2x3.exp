@@ -3445,7 +3445,7 @@ ENTITY IfcConic
 	(IfcCircle
 	,IfcEllipse))
  SUBTYPE OF (IfcCurve);
-	Position : IfcAxis2Placement;
+	position : IfcAxis2Placement;
 END_ENTITY;
 
 ENTITY IfcConnectedFaceSet
@@ -3722,7 +3722,7 @@ ENTITY IfcCsgPrimitive3D
 	,IfcRightCircularCylinder
 	,IfcSphere))
  SUBTYPE OF (IfcGeometricRepresentationItem);
-	Position : IfcAxis2Placement3D;
+	position : IfcAxis2Placement3D;
  DERIVE
 	Dim : IfcDimensionCount := 3;
 END_ENTITY;
@@ -4353,9 +4353,9 @@ ENTITY IfcElementarySurface
  ABSTRACT SUPERTYPE OF (ONEOF
 	(IfcPlane))
  SUBTYPE OF (IfcSurface);
-	Position : IfcAxis2Placement3D;
+	position : IfcAxis2Placement3D;
  DERIVE
-	Dim : IfcDimensionCount := Position.Dim;
+	Dim : IfcDimensionCount := position.Dim;
 END_ENTITY;
 
 ENTITY IfcEllipse
@@ -5149,7 +5149,7 @@ END_ENTITY;
 
 ENTITY IfcLightSourceGoniometric
  SUBTYPE OF (IfcLightSource);
-	Position : IfcAxis2Placement3D;
+	position : IfcAxis2Placement3D;
 	ColourAppearance : OPTIONAL IfcColourRgb;
 	ColourTemperature : IfcThermodynamicTemperatureMeasure;
 	LuminousFlux : IfcLuminousFluxMeasure;
@@ -5161,7 +5161,7 @@ ENTITY IfcLightSourcePositional
  SUPERTYPE OF (ONEOF
 	(IfcLightSourceSpot))
  SUBTYPE OF (IfcLightSource);
-	Position : IfcCartesianPoint;
+	position : IfcCartesianPoint;
 	Radius : IfcPositiveLengthMeasure;
 	ConstantAttenuation : IfcReal;
 	DistanceAttenuation : IfcReal;
@@ -5577,7 +5577,7 @@ ENTITY IfcParameterizedProfileDef
 	,IfcUShapeProfileDef
 	,IfcZShapeProfileDef))
  SUBTYPE OF (IfcProfileDef);
-	Position : IfcAxis2Placement2D;
+	position : IfcAxis2Placement2D;
 END_ENTITY;
 
 ENTITY IfcPath
@@ -5772,7 +5772,7 @@ END_ENTITY;
 
 ENTITY IfcPolygonalBoundedHalfSpace
  SUBTYPE OF (IfcHalfSpaceSolid);
-	Position : IfcAxis2Placement3D;
+	position : IfcAxis2Placement3D;
 	PolygonalBoundary : IfcBoundedCurve;
  WHERE
 	WR41 : PolygonalBoundary.Dim = 2;
@@ -7706,7 +7706,7 @@ ENTITY IfcSweptAreaSolid
 	,IfcSurfaceCurveSweptAreaSolid))
  SUBTYPE OF (IfcSolidModel);
 	SweptArea : IfcProfileDef;
-	Position : IfcAxis2Placement3D;
+	position : IfcAxis2Placement3D;
  WHERE
 	WR22 : SweptArea.ProfileType = IfcProfileTypeEnum.Area;
 END_ENTITY;
@@ -7729,9 +7729,9 @@ ENTITY IfcSweptSurface
 	,IfcSurfaceOfRevolution))
  SUBTYPE OF (IfcSurface);
 	SweptCurve : IfcProfileDef;
-	Position : IfcAxis2Placement3D;
+	position : IfcAxis2Placement3D;
  DERIVE
-	Dim : IfcDimensionCount := Position.Dim;
+	Dim : IfcDimensionCount := position.Dim;
  WHERE
 	WR1 : NOT('IFC2X3.IFCDERIVEDPROFILEDEF' IN TYPEOF(SweptCurve));
 	WR2 : SweptCurve.ProfileType = IfcProfileTypeEnum.Curve;
@@ -8709,7 +8709,7 @@ FUNCTION IfcCurveDim
       THEN RETURN(Curve.Pnt.Dim);
     END_IF;
     IF ('IFC2X3.IFCCONIC' IN TYPEOF(Curve))
-      THEN RETURN(Curve.Position.Dim);
+      THEN RETURN(Curve.position.Dim);
     END_IF;
     IF ('IFC2X3.IFCPOLYLINE' IN TYPEOF(Curve))
       THEN RETURN(Curve.Points[1].Dim);

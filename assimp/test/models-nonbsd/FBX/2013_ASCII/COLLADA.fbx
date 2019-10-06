@@ -208,7 +208,7 @@ Definitions:  {
 		Count: 4
 		PropertyTemplate: "FbxCamera" {
 			Properties70:  {
-				P: "Position", "Vector", "", "A",0,0,-50
+				P: "position", "Vector", "", "A",0,0,-50
 				P: "UpVector", "Vector", "", "A",0,1,0
 				P: "InterestPosition", "Vector", "", "A",0,0,0
 				P: "Roll", "Roll", "", "A",0
@@ -378,7 +378,7 @@ Objects:  {
 		}
 		TypeFlags: "Camera"
 		GeometryVersion: 124
-		Position: 0,0,-50
+		position: 0,0,-50
 		Up: 0,1,0
 		LookAt: 0,0,-1
 		ShowInfoOnMoving: 1
@@ -833,7 +833,7 @@ Objects:  {
 		}
 		TypeFlags: "Camera"
 		GeometryVersion: 124
-		Position: 0,0,-50
+		position: 0,0,-50
 		Up: 0,1,0
 		LookAt: 0,0,-1
 		ShowInfoOnMoving: 1

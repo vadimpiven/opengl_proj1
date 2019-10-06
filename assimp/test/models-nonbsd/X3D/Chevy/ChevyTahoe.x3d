@@ -42,8 +42,8 @@
               <MetadataFloat containerField='value' name='height' value='2.22'>
                 <MetadataString name='appinfo' value='"The maximum structural height of the object in meters. This may be used for clearance checking or other calculations."'/>
               </MetadataFloat>
-              <MetadataFloat containerField='value' name='width' value='2.397'>
-                <MetadataString name='appinfo' value='"The maximum width, beam, or wingspan of the vehicle in meters. This may be used for clearance checking or other calculations."'/>
+              <MetadataFloat containerField='value' name='WIDTH' value='2.397'>
+                <MetadataString name='appinfo' value='"The maximum WIDTH, beam, or wingspan of the vehicle in meters. This may be used for clearance checking or other calculations."'/>
               </MetadataFloat>
               <MetadataFloat containerField='value' name='length' value='5.465'>
                 <MetadataString name='appinfo' value='"The maximum structural length of the object in meters. This may be used for clearance checking or other calculations."'/>

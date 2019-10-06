@@ -149,8 +149,8 @@
   <library_geometries>
     <geometry id="Teapot01-lib" name="Teapot01Mesh">
       <mesh>
-        <source id="Teapot01-lib-Position">
-          <float_array id="Teapot01-lib-Position-array" count="1590">
+        <source id="Teapot01-lib-position">
+          <float_array id="Teapot01-lib-position-array" count="1590">
 21,920870 0,000000 37,578636
 21,615053 0,000000 38,734619
 21,969801 0,000000 39,119946
@@ -683,7 +683,7 @@
 18,777575 7,989374 37,578636
 </float_array>
           <technique_common>
-            <accessor source="#Teapot01-lib-Position-array" count="530" stride="3">
+            <accessor source="#Teapot01-lib-position-array" count="530" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -4488,7 +4488,7 @@
           </technique_common>
         </source>
         <vertices id="Teapot01-lib-Vertex">
-          <input semantic="POSITION" source="#Teapot01-lib-Position"/>
+          <input semantic="POSITION" source="#Teapot01-lib-position"/>
         </vertices>
         <polygons material="_01___Default" count="992">
           <input semantic="VERTEX" offset="0" source="#Teapot01-lib-Vertex"/>
@@ -5491,8 +5491,8 @@
     </geometry>
     <geometry id="Teapot02-lib" name="Teapot02Mesh">
       <mesh>
-        <source id="Teapot02-lib-Position">
-          <float_array id="Teapot02-lib-Position-array" count="1590">
+        <source id="Teapot02-lib-position">
+          <float_array id="Teapot02-lib-position-array" count="1590">
 6,614434 0,000000 11,339031
 6,522157 0,000000 11,687839
 6,629199 0,000000 11,804108
@@ -6025,7 +6025,7 @@
 5,665972 2,410725 11,339031
 </float_array>
           <technique_common>
-            <accessor source="#Teapot02-lib-Position-array" count="530" stride="3">
+            <accessor source="#Teapot02-lib-position-array" count="530" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -9830,7 +9830,7 @@
           </technique_common>
         </source>
         <vertices id="Teapot02-lib-Vertex">
-          <input semantic="POSITION" source="#Teapot02-lib-Position"/>
+          <input semantic="POSITION" source="#Teapot02-lib-position"/>
         </vertices>
         <polygons material="_08___Default" count="992">
           <input semantic="VERTEX" offset="0" source="#Teapot02-lib-Vertex"/>
@@ -10833,8 +10833,8 @@
     </geometry>
     <geometry id="Teapot03-lib" name="Teapot03Mesh">
       <mesh>
-        <source id="Teapot03-lib-Position">
-          <float_array id="Teapot03-lib-Position-array" count="1590">
+        <source id="Teapot03-lib-position">
+          <float_array id="Teapot03-lib-position-array" count="1590">
 7,699217 0,000000 13,198658
 7,591806 0,000000 13,604671
 7,716403 0,000000 13,740008
@@ -11367,7 +11367,7 @@
 6,595204 2,806089 13,198658
 </float_array>
           <technique_common>
-            <accessor source="#Teapot03-lib-Position-array" count="530" stride="3">
+            <accessor source="#Teapot03-lib-position-array" count="530" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -14362,7 +14362,7 @@
           </technique_common>
         </source>
         <vertices id="Teapot03-lib-Vertex">
-          <input semantic="POSITION" source="#Teapot03-lib-Position"/>
+          <input semantic="POSITION" source="#Teapot03-lib-position"/>
         </vertices>
         <polygons material="_07___Default" count="992">
           <input semantic="VERTEX" offset="0" source="#Teapot03-lib-Vertex"/>

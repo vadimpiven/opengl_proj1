@@ -234,7 +234,7 @@ namespace DotZLib
         }
         #endregion
 
-        #region Position & length stuff
+        #region position & length stuff
         /// <summary>
         /// Not supported.
         /// </summary>
@@ -272,7 +272,7 @@ namespace DotZLib
         /// </summary>
         /// <remarks>In this implementation this property is not supported</remarks>
         /// <exception cref="NotSupportedException">Always thrown</exception>
-        public override long Position
+        public override long position
         {
             get
             {

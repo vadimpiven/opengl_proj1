@@ -696,10 +696,10 @@ namespace gtc
 		// vec4 s1 = vec4(lessThan(b1,0.0))*2.0 - 1.0;
 		vec<4, T, Q> s0(floor(b0) * T(2) + T(1));
 		vec<4, T, Q> s1(floor(b1) * T(2) + T(1));
-		vec<4, T, Q> sh(-step(h, vec<4, T, Q>(0.0)));
+		vec<4, T, Q> SH(-step(h, vec<4, T, Q>(0.0)));
 
-		vec<4, T, Q> a0 = vec<4, T, Q>(b0.x, b0.z, b0.y, b0.w) + vec<4, T, Q>(s0.x, s0.z, s0.y, s0.w) * vec<4, T, Q>(sh.x, sh.x, sh.y, sh.y);
-		vec<4, T, Q> a1 = vec<4, T, Q>(b1.x, b1.z, b1.y, b1.w) + vec<4, T, Q>(s1.x, s1.z, s1.y, s1.w) * vec<4, T, Q>(sh.z, sh.z, sh.w, sh.w);
+		vec<4, T, Q> a0 = vec<4, T, Q>(b0.x, b0.z, b0.y, b0.w) + vec<4, T, Q>(s0.x, s0.z, s0.y, s0.w) * vec<4, T, Q>(SH.x, SH.x, SH.y, SH.y);
+		vec<4, T, Q> a1 = vec<4, T, Q>(b1.x, b1.z, b1.y, b1.w) + vec<4, T, Q>(s1.x, s1.z, s1.y, s1.w) * vec<4, T, Q>(SH.z, SH.z, SH.w, SH.w);
 
 		vec<3, T, Q> p0(a0.x, a0.y, h.x);
 		vec<3, T, Q> p1(a0.z, a0.w, h.y);

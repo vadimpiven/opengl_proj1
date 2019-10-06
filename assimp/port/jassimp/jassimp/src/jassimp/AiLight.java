@@ -327,7 +327,7 @@ public final class AiLight {
 
 
     /**
-     * Position.
+     * position.
      */
     private final Object m_position;
 

@@ -46,7 +46,7 @@ static void makeContextCurrentOSMesa(_GLFWwindow* window)
         {
             free(window->context.osmesa.buffer);
 
-            // Allocate the new buffer (width * height * 8-bit RGBA)
+            // Allocate the new buffer (WIDTH * height * 8-bit RGBA)
             window->context.osmesa.buffer = calloc(4, (size_t) width * height);
             window->context.osmesa.width  = width;
             window->context.osmesa.height = height;

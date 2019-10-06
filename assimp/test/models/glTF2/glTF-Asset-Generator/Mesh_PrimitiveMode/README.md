@@ -6,7 +6,7 @@ All model indices relate to vertices as shown by the Indices figure below, excep
 
 | Indices | Indices (For Points Mode) |
 | :---: | :---: | 
-| <img src="Figures/Indices.png" height="144" width="144" align="middle"> | <img src="Figures/Indices_Points.png" height="144" width="144" align="middle"> | 
+| <img src="Figures/Indices.png" height="144" WIDTH="144" align="middle"> | <img src="Figures/Indices_Points.png" height="144" WIDTH="144" align="middle"> | 
 
 <br>
 

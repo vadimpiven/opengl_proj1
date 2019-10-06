@@ -73,8 +73,8 @@
   <library_geometries>
     <geometry id="Sphere01-lib" name="Sphere01Mesh">
       <mesh>
-        <source id="Sphere01-lib-Position">
-          <float_array id="Sphere01-lib-Position-array" count="1446">
+        <source id="Sphere01-lib-position">
+          <float_array id="Sphere01-lib-position-array" count="1446">
 0,000000 0,000000 34,693176
 -0,000000 6,768303 34,026558
 -1,320431 6,638252 34,026558
@@ -559,7 +559,7 @@
 0,000000 0,000000 -34,693176
 </float_array>
           <technique_common>
-            <accessor source="#Sphere01-lib-Position-array" count="482" stride="3">
+            <accessor source="#Sphere01-lib-position-array" count="482" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -3994,7 +3994,7 @@
           </technique_common>
         </source>
         <vertices id="Sphere01-lib-Vertex">
-          <input semantic="POSITION" source="#Sphere01-lib-Position"/>
+          <input semantic="POSITION" source="#Sphere01-lib-position"/>
         </vertices>
         <polygons material="_01___Default" count="960">
           <input semantic="VERTEX" offset="0" source="#Sphere01-lib-Vertex"/>
@@ -4965,8 +4965,8 @@
     </geometry>
     <geometry id="Sphere02-lib" name="Sphere02Mesh">
       <mesh>
-        <source id="Sphere02-lib-Position">
-          <float_array id="Sphere02-lib-Position-array" count="1446">
+        <source id="Sphere02-lib-position">
+          <float_array id="Sphere02-lib-position-array" count="1446">
 0,000000 0,000000 10,964745
 -0,000000 2,139116 10,754060
 -0,417321 2,098013 10,754060
@@ -5451,7 +5451,7 @@
 0,000000 0,000000 -10,964745
 </float_array>
           <technique_common>
-            <accessor source="#Sphere02-lib-Position-array" count="482" stride="3">
+            <accessor source="#Sphere02-lib-position-array" count="482" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -8921,7 +8921,7 @@
           </technique_common>
         </source>
         <vertices id="Sphere02-lib-Vertex">
-          <input semantic="POSITION" source="#Sphere02-lib-Position"/>
+          <input semantic="POSITION" source="#Sphere02-lib-position"/>
         </vertices>
         <polygons count="960">
           <input semantic="VERTEX" offset="0" source="#Sphere02-lib-Vertex"/>

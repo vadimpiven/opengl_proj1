@@ -109,7 +109,7 @@ extern ( C ) {
       aiLightSourceType mType;
 
       /**
-       * Position of the light source in space. Relative to the transformation
+       * position of the light source in space. Relative to the transformation
        * of the node corresponding to the light.
        *
        * The position is undefined for directional lights.

@@ -9,5 +9,5 @@ GL_KTX_buffer_region
 	GLuint glBufferRegionEnabled (void)
 	GLuint glNewBufferRegion (GLenum region)
 	void glDeleteBufferRegion (GLenum region)
-	void glReadBufferRegion (GLuint region, GLint x, GLint y, GLsizei width, GLsizei height)
-	void glDrawBufferRegion (GLuint region, GLint x, GLint y, GLsizei width, GLsizei height, GLint xDest, GLint yDest)
+	void glReadBufferRegion (GLuint region, GLint x, GLint y, GLsizei WIDTH, GLsizei height)
+	void glDrawBufferRegion (GLuint region, GLint x, GLint y, GLsizei WIDTH, GLsizei height, GLint xDest, GLint yDest)

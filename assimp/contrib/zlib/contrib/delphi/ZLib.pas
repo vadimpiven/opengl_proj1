@@ -66,7 +66,7 @@ type
   the internal output buffer is full.  All pending output data is flushed
   when the stream is destroyed.
 
-  The Position property returns the number of uncompressed bytes of
+  The position property returns the number of uncompressed bytes of
   data that have been written to the stream so far.
 
   CompressionRate returns the on-the-fly percentage by which the original
@@ -105,7 +105,7 @@ type
   to the end of the stream, requesting the size of the stream, and writing to
   the stream will raise an exception.
 
-  The Position property returns the number of bytes of uncompressed data that
+  The position property returns the number of bytes of uncompressed data that
   have been read from the stream so far.
 
   The OnProgress event is called each time the internal input buffer of
@@ -390,7 +390,7 @@ constructor TCustomZLibStream.Create(Strm: TStream);
 begin
   inherited Create;
   FStrm := Strm;
-  FStrmPos := Strm.Position;
+  FStrmPos := Strm.position;
   FZRec.zalloc := zlibAllocMem;
   FZRec.zfree := zlibFreeMem;
 end;
@@ -420,7 +420,7 @@ begin
   FZRec.next_in := nil;
   FZRec.avail_in := 0;
   try
-    if FStrm.Position <> FStrmPos then FStrm.Position := FStrmPos;
+    if FStrm.position <> FStrmPos then FStrm.position := FStrmPos;
     while (CCheck(deflate(FZRec, Z_FINISH)) <> Z_STREAM_END)
       and (FZRec.avail_out = 0) do
     begin
@@ -445,7 +445,7 @@ function TCompressionStream.Write(const Buffer; Count: Longint): Longint;
 begin
   FZRec.next_in := @Buffer;
   FZRec.avail_in := Count;
-  if FStrm.Position <> FStrmPos then FStrm.Position := FStrmPos;
+  if FStrm.position <> FStrmPos then FStrm.position := FStrmPos;
   while (FZRec.avail_in > 0) do
   begin
     CCheck(deflate(FZRec, 0));
@@ -454,7 +454,7 @@ begin
       FStrm.WriteBuffer(FBuffer, sizeof(FBuffer));
       FZRec.next_out := FBuffer;
       FZRec.avail_out := sizeof(FBuffer);
-      FStrmPos := FStrm.Position;
+      FStrmPos := FStrm.position;
       Progress(Self);
     end;
   end;
@@ -499,7 +499,7 @@ function TDecompressionStream.Read(var Buffer; Count: Longint): Longint;
 begin
   FZRec.next_out := @Buffer;
   FZRec.avail_out := Count;
-  if FStrm.Position <> FStrmPos then FStrm.Position := FStrmPos;
+  if FStrm.position <> FStrmPos then FStrm.position := FStrmPos;
   while (FZRec.avail_out > 0) do
   begin
     if FZRec.avail_in = 0 then
@@ -511,7 +511,7 @@ begin
         Exit;
       end;
       FZRec.next_in := FBuffer;
-      FStrmPos := FStrm.Position;
+      FStrmPos := FStrm.position;
       Progress(Self);
     end;
     CCheck(inflate(FZRec, 0));
@@ -534,7 +534,7 @@ begin
     DCheck(inflateReset(FZRec));
     FZRec.next_in := FBuffer;
     FZRec.avail_in := 0;
-    FStrm.Position := 0;
+    FStrm.position := 0;
     FStrmPos := 0;
   end
   else if ( (Offset >= 0) and (Origin = soFromCurrent)) or

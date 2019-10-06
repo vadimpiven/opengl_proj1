@@ -119,7 +119,7 @@
 	<material />
   </materials>
   <textures>
-    <texture type="width, height, formatHint">
+    <texture type="WIDTH, height, formatHint">
       <data />
     </texture>
     <texture />

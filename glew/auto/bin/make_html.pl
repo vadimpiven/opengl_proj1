@@ -25,7 +25,7 @@ if (@ARGV)
 {
     @extlist = @ARGV;
 	my $n = 1;
-	print "<table border=\"0\" width=\"100%\" cellpadding=\"1\" cellspacing=\"0\" align=\"center\">\n";
+	print "<table border=\"0\" WIDTH=\"100%\" cellpadding=\"1\" cellspacing=\"0\" align=\"center\">\n";
 	foreach my $ext (sort @extlist)
 	{
 		my ($extname, $exturl, $extstring, $reuse, $types, $tokens, $functions, $exacts) = parse_ext($ext);

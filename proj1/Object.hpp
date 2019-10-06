@@ -2,11 +2,14 @@
 #define OPENGL_OBJECT_HPP
 
 #include <vector>
+
 #include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-#include "Shader.hpp"
 #include <GL/glew.h>
+
+#include "Shader.hpp"
 
 class Object {
     GLuint VAO;
@@ -15,13 +18,17 @@ class Object {
 
     const Shader *const shader;
 
+    GLuint modelHandler;
+    GLuint placementHandler;
+    GLuint viewHandler;
+    GLuint projectionHandler;
+
+    const glm::mat4 *const placement;
+    const glm::mat4 *const view;
+    const glm::mat4 *const projection;
+
 protected:
     glm::mat4 model;
-    GLint modelHandler;
-    glm::mat4 view;
-    GLint viewHandler;
-    glm::mat4 projection;
-    GLint projectionHandler;
 
     std::vector<GLfloat> vertices;
     std::vector<GLuint> indices;
@@ -38,10 +45,11 @@ public:
     Object() = delete;
 
     explicit
-    Object(const Shader *, glm::mat4) noexcept;
+    Object(const Shader *, const glm::mat4 *,
+           const glm::mat4 *, const glm::mat4 *) noexcept;
 
     virtual
-    void Draw() noexcept = 0;
+    void Draw(GLfloat, GLfloat) noexcept = 0;
 
     virtual
     ~Object() noexcept;

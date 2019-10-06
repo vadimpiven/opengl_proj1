@@ -15844,7 +15844,7 @@ CASE pdf\shape_aspect.description OF
                  ) = 2))) = 1))) = 1) AND
               (SIZEOF( QUERY( srwp <* parameter_representations |
                (SIZEOF( QUERY( i <* srwp.items |
-                 (i.name='target width') AND
+                 (i.name='target WIDTH') AND
                  (SIZEOF(['AP203_CONFIGURATION_CONTROLLED_3D_DESIGN_OF_MECHANICAL_PARTS_AND_ASSEMBLIES_MIM_LF.MEASURE_REPRESENTATION_ITEM',
  		'AP203_CONFIGURATION_CONTROLLED_3D_DESIGN_OF_MECHANICAL_PARTS_AND_ASSEMBLIES_MIM_LF.LENGTH_MEASURE_WITH_UNIT']*TYPEOF(i)
                   ) = 2))) = 1) )) = 1));

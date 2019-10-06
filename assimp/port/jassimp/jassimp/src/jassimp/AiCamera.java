@@ -242,7 +242,7 @@ public final class AiCamera {
     /** 
      * Returns the screen aspect ratio.<p>
      *
-     * This is the ration between the width and the height of the
+     * This is the ration between the WIDTH and the height of the
      * screen. Typical values are 4/3, 1/2 or 1/1. This value is
      * 0 if the aspect ratio is not defined in the source file.
      * 0 is also the default value.
@@ -261,7 +261,7 @@ public final class AiCamera {
     
     
     /**
-     * Position.
+     * position.
      */
     private final Object m_position;
     

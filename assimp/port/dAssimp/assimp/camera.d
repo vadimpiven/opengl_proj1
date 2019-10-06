@@ -105,7 +105,7 @@ extern ( C ) {
 
 
       /**
-       * Position of the camera relative to the coordinate space defined by the
+       * position of the camera relative to the coordinate space defined by the
        * corresponding node.
        *
        * The default value is 0|0|0.
@@ -171,7 +171,7 @@ extern ( C ) {
       /**
        * Screen aspect ratio.
        *
-       * This is the ration between the width and the height of the
+       * This is the ration between the WIDTH and the height of the
        * screen. Typical values are 4/3, 1/2 or 1/1. This value is
        * 0 if the aspect ratio is not defined in the source file.
        *

@@ -156,7 +156,7 @@ EOT
 # add typedefs to GLX_SGIX_pbuffer
     cat >> $1/GLX_SGIX_pbuffer <<EOT
     typedef XID GLXPbufferSGIX
-	typedef struct { int type; unsigned long serial; Bool send_event; Display *display; GLXDrawable drawable; int event_type; int draw_type; unsigned int mask; int x, y; int width, height; int count; } GLXBufferClobberEventSGIX
+	typedef struct { int type; unsigned long serial; Bool send_event; Display *display; GLXDrawable drawable; int event_type; int draw_type; unsigned int mask; int x, y; int WIDTH, height; int count; } GLXBufferClobberEventSGIX
 EOT
 
 # add typedef to GL_NV_half_float
@@ -281,12 +281,12 @@ EOT
 
 # add missing function to GLX_NV_copy_image
 	cat >> $1/GLX_NV_copy_image <<EOT
-  void glXCopyImageSubDataNV (Display *dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+  void glXCopyImageSubDataNV (Display *dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei WIDTH, GLsizei height, GLsizei depth)
 EOT
 
 # add missing function to WGL_NV_copy_image
 	cat >> $1/WGL_NV_copy_image <<EOT
-  BOOL wglCopyImageSubDataNV (HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+  BOOL wglCopyImageSubDataNV (HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei WIDTH, GLsizei height, GLsizei depth)
 EOT
 
 # Filter glProgramUniform from GL_EXT_separate_shader_objects

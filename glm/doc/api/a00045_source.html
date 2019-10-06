@@ -125,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <span class="keywordtype">bool</span>       formatted;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="keywordtype">unsigned</span>   precision;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        <span class="keywordtype">unsigned</span>   width;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        <span class="keywordtype">unsigned</span>   WIDTH;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        char_type  separator;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        char_type  delim_left;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        char_type  delim_right;</div>
@@ -191,11 +191,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                        GLM_FUNC_DECL <span class="keyword">explicit</span> precision(<span class="keywordtype">unsigned</span>);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                };</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <span class="keyword">struct </span>width</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <span class="keyword">struct </span>WIDTH</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                {</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                        <span class="keywordtype">unsigned</span> value;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                        GLM_FUNC_DECL <span class="keyword">explicit</span> width(<span class="keywordtype">unsigned</span>);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                        GLM_FUNC_DECL <span class="keyword">explicit</span> WIDTH(<span class="keywordtype">unsigned</span>);</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                };</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="keyword">template</span>&lt;<span class="keyword">typename</span> CTy&gt;</div>
@@ -225,7 +225,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <span class="keyword">template</span>&lt;<span class="keyword">typename</span> CTy, <span class="keyword">typename</span> CTr&gt;</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                std::basic_ostream&lt;CTy, CTr&gt;&amp; operator&lt;&lt;(std::basic_ostream&lt;CTy, CTr&gt;&amp;, precision <span class="keyword">const</span>&amp;);</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                <span class="keyword">template</span>&lt;<span class="keyword">typename</span> CTy, <span class="keyword">typename</span> CTr&gt;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                std::basic_ostream&lt;CTy, CTr&gt;&amp; operator&lt;&lt;(std::basic_ostream&lt;CTy, CTr&gt;&amp;, width <span class="keyword">const</span>&amp;);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                std::basic_ostream&lt;CTy, CTr&gt;&amp; operator&lt;&lt;(std::basic_ostream&lt;CTy, CTr&gt;&amp;, WIDTH <span class="keyword">const</span>&amp;);</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="keyword">template</span>&lt;<span class="keyword">typename</span> CTy, <span class="keyword">typename</span> CTr&gt;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                std::basic_ostream&lt;CTy, CTr&gt;&amp; operator&lt;&lt;(std::basic_ostream&lt;CTy, CTr&gt;&amp;, delimeter&lt;CTy&gt; <span class="keyword">const</span>&amp;);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                <span class="keyword">template</span>&lt;<span class="keyword">typename</span> CTy, <span class="keyword">typename</span> CTr&gt;</div>

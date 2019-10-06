@@ -139,7 +139,7 @@ public final class AiNodeAnim {
     /** 
      * Returns the buffer with position keys of this animation channel.<p>
      * 
-     * Position keys consist of a time value (double) and a position (3D vector
+     * position keys consist of a time value (double) and a position (3D vector
      * of floats), resulting in a total of 20 bytes per entry. 
      * The buffer contains {@link #getNumPosKeys()} of these entries.<p>
      *

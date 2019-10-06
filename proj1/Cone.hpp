@@ -6,9 +6,10 @@
 class Cone : public Object {
 public:
     explicit
-    Cone(const Shader *, glm::mat4) noexcept;
+    Cone(const Shader *, const glm::mat4 *,
+         const glm::mat4 *, const glm::mat4 *) noexcept;
 
-    void Draw() noexcept override;
+    void Draw(GLfloat, GLfloat) noexcept override;
 };
 
 #endif //OPENGL_CONE_HPP
