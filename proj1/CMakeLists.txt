@@ -22,22 +22,18 @@ endif(WIN32)
 add_executable("${PROJECT_NAME}" WIN32 "${SOURCES}" Cube.cpp Cube.hpp)
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
 
-## Assimp - load 3D objects
-#set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-#set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-#add_subdirectory(../assimp "${PROJECT_BINARY_DIR}/assimp") # https://github.com/assimp/assimp
-#target_include_directories("${PROJECT_NAME}" PRIVATE ../assimp/include)
-#target_link_libraries("${PROJECT_NAME}" assimp)
-#
-## SOIL - open textures
-#add_subdirectory(../soil "${PROJECT_BINARY_DIR}/soil") # https://github.com/paralin/soil
-#target_include_directories("${PROJECT_NAME}" PRIVATE ../soil/inc)
-#target_link_libraries("${PROJECT_NAME}" soil)
+# tinyobjloader - loads .obj 3d mdels
+add_subdirectory(../tinyobjloader "${PROJECT_BINARY_DIR}/tinyobjloader")
+target_include_directories("${PROJECT_NAME}" PRIVATE ../tinyobjloader)
+target_link_libraries("${PROJECT_NAME}" tinyobjloader)
+
+# STB - image loader for textures
+target_include_directories("${PROJECT_NAME}" PRIVATE  ../stb)
 
 # GLM - GLSL-like types
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 set(GLM_TEST_ENABLE OFF CACHE BOOL "" FORCE)
-add_subdirectory(../glm "${PROJECT_BINARY_DIR}/glm") # https://github.com/g-truc/glm
+add_subdirectory(../glm "${PROJECT_BINARY_DIR}/glm")
 target_include_directories("${PROJECT_NAME}" PRIVATE ../glm/glm)
 target_link_libraries("${PROJECT_NAME}" glm_static)
 
@@ -49,7 +45,7 @@ target_link_libraries("${PROJECT_NAME}" "${OPENGL_LIBRARIES}")
 # GLEW - load OpenGl
 set(glew-cmake_BUILD_SHARED OFF CACHE BOOL "" FORCE)
 set(glew-cmake_BUILD_MULTI_CONTEXT OFF CACHE BOOL "" FORCE)
-add_subdirectory(../glew "${PROJECT_BINARY_DIR}/glew") # https://github.com/Perlmint/glew-cmake
+add_subdirectory(../glew "${PROJECT_BINARY_DIR}/glew")
 target_include_directories("${PROJECT_NAME}" PRIVATE ../glew/include)
 target_link_libraries("${PROJECT_NAME}" libglew_static)
 
@@ -58,7 +54,7 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-add_subdirectory(../glfw "${PROJECT_BINARY_DIR}/glfw") # https://github.com/glfw/glfw
+add_subdirectory(../glfw "${PROJECT_BINARY_DIR}/glfw")
 target_link_libraries("${PROJECT_NAME}" glfw)
 
 # copy resources
