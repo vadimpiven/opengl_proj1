@@ -85,12 +85,18 @@ int main() {
     w.SetCursorPosCallback(mouseCallback);
 
     // initialise shaders
-    SH.resize(1);
-    SH[0] = new Shader(VERT_XYZ_RGB, FRAG_RGB);
-    SH[1] = new Shader(VERT_SKYBOX, FRAG_SKYBOX);
+    SH.resize(2);
+    SH[0] = new Shader(VERT_SKYBOX, FRAG_SKYBOX);
+    SH[1] = new Shader(VERT_XYZ_RGB, FRAG_RGB);
 
     // initialise objects
     glm::mat4 placement;
+
+    // cube skybox
+    placement = glm::scale(glm::mat4(1.0f), glm::vec3(100.0f));
+    OBJ.emplace_back(new objectStorage);
+    OBJ.back()->placement = placement;
+    OBJ.back()->object = new Cube(SH[0], &(OBJ.back()->placement), &VIEW, &PROJECTION);
 
     // cone object
     placement = glm::translate(
@@ -101,13 +107,7 @@ int main() {
             glm::vec3(1.0, 0.0, 0.0)); // tilt front
     OBJ.emplace_back(new objectStorage);
     OBJ.back()->placement = placement;
-    OBJ.back()->object = new Cone(SH[0], &(OBJ.back()->placement), &VIEW, &PROJECTION);
-
-    // cube skybox
-    placement = glm::scale(glm::mat4(1.0f), glm::vec3(100.0f));
-    OBJ.emplace_back(new objectStorage);
-    OBJ.back()->placement = placement;
-    OBJ.back()->object = new Cube(SH[1], &(OBJ.back()->placement), &VIEW, &PROJECTION);
+    OBJ.back()->object = new Cone(SH[1], &(OBJ.back()->placement), &VIEW, &PROJECTION);
 
     // main loop
     w.Loop(redraw); // infinite loop while window is open

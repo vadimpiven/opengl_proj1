@@ -54,7 +54,7 @@ Cone::Cone(
 ) noexcept
         : Object(shaderProgram, placement, view, projection) {
     const GLfloat h = 0.6, r = 0.5;
-    const unsigned n = 60, s = 6;
+    const unsigned n = 120, s = 6;
     vertices.resize(s * (n + 2));
     indices.resize(3 * (n * 2));
 

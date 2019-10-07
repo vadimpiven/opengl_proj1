@@ -22,6 +22,9 @@ void Window::initGLFW() noexcept {
 
     // make window not resizable
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
+    // enable multisampling
+    glfwWindowHint(GLFW_SAMPLES, 4);
 }
 
 /// Initialise GLEW library to allow interactions with OpenGL.
@@ -36,6 +39,7 @@ void Window::resizeWindow() noexcept {
     glViewport(0, 0, width, height); // set window position and size
     glEnable(GL_DEPTH_TEST); // enable depth check (for correct 3D redraw)
     glEnable(GL_STENCIL_TEST); // enable stencil check
+    glEnable(GL_MULTISAMPLE); // enable multisampling
 }
 
 Window::Window(const GLsizei width, const GLsizei height, const char *title) noexcept {
