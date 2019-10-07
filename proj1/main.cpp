@@ -87,7 +87,7 @@ int main() {
     // initialise shaders
     SH.resize(1);
     SH[0] = new Shader(VERT_XYZ_RGB, FRAG_RGB);
-//    SH[1] = new Shader(VERT_XYZ, FRAG_WHITE);
+    SH[1] = new Shader(VERT_SKYBOX, FRAG_SKYBOX);
 
     // initialise objects
     glm::mat4 placement;
@@ -103,14 +103,11 @@ int main() {
     OBJ.back()->placement = placement;
     OBJ.back()->object = new Cone(SH[0], &(OBJ.back()->placement), &VIEW, &PROJECTION);
 
-//    // cube light
-//    placement = glm::translate(
-//            glm::mat4(1.0f),
-//            glm::vec3(-0.4f, -0.3f, -0.8f));
-//    placement = glm::scale(placement, glm::vec3(0.08f));
-//    OBJ.emplace_back(new objectStorage);
-//    OBJ.back()->placement = placement;
-//    OBJ.back()->object = new Cube(SH[1], &(OBJ.back()->placement), &VIEW, &PROJECTION);
+    // cube skybox
+    placement = glm::scale(glm::mat4(1.0f), glm::vec3(100.0f));
+    OBJ.emplace_back(new objectStorage);
+    OBJ.back()->placement = placement;
+    OBJ.back()->object = new Cube(SH[1], &(OBJ.back()->placement), &VIEW, &PROJECTION);
 
     // main loop
     w.Loop(redraw); // infinite loop while window is open

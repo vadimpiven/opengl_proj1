@@ -4,6 +4,8 @@
 #include "Object.hpp"
 
 class Cube : public Object {
+    GLuint texture;
+
 public:
     explicit
     Cube(const Shader *, const glm::mat4 *,

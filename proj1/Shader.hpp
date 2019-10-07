@@ -45,24 +45,31 @@ void main() {
     color = vec4(RGB, 1.0f);
 })~";
 
-const GLchar FRAG_WHITE[] = R"~(
+const GLchar FRAG_SKYBOX[] = R"~(
 #version 330 core
 
 out vec4 color;
 
+in vec3 TexCoords;
+
+uniform samplerCube skybox;
+
 void main() {
-    color = vec4(1.0f);
+    color = texture(skybox, TexCoords);
 })~";
 
-const GLchar VERT_XYZ[] = R"~(
+const GLchar VERT_SKYBOX[] = R"~(
 #version 330 core
 
 layout (location = 0) in vec3 inXYZ;
+
+out vec3 TexCoords;
 
 uniform mat4 transform;
 
 void main() {
     gl_Position = transform * vec4(inXYZ, 1.0f);
+    TexCoords = inXYZ;
 }
 )~";
 
