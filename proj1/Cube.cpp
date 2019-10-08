@@ -9,13 +9,14 @@
 unsigned int loadTexture(GLuint textureID) {
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
+    // any from http://www.custommapmakers.org/skyboxes.php
     std::vector<std::string> faces{
-            "front.tga",
-            "back.tga",
-            "top.tga",
-            "bottom.tga",
-            "right.tga",
-            "left.tga",
+            "ft.tga", // front
+            "bk.tga", // back
+            "up.tga", // up
+            "dn.tga", // down
+            "rt.tga", // right
+            "lt.tga", // left
     };
     int width, height, nrChannels;
     for (std::vector<std::string>::size_type i = 0; i < faces.size(); ++i) {
