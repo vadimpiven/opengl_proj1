@@ -39,7 +39,12 @@ void Window::resizeWindow() noexcept {
     glViewport(0, 0, width, height); // set window position and size
     glEnable(GL_DEPTH_TEST); // enable depth check (for correct 3D redraw)
     glEnable(GL_STENCIL_TEST); // enable stencil check
-    glEnable(GL_MULTISAMPLE); // enable multisampling
+    // smoothing
+    glEnable(GL_MULTISAMPLE);
+    glEnable(GL_LINE_SMOOTH);
+    glEnable(GL_POLYGON_SMOOTH);
+    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+    glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
 }
 
 Window::Window(const GLsizei width, const GLsizei height, const char *title) noexcept {
