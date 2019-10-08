@@ -6,13 +6,19 @@
 #include "stb_image.h"
 #include "Cube.hpp"
 
-unsigned int loadTexture(std::vector<std::string> faces) {
-    unsigned int textureID;
-    glGenTextures(1, &textureID);
+unsigned int loadTexture(GLuint textureID) {
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
+    std::vector<std::string> faces{
+            "front.tga",
+            "back.tga",
+            "top.tga",
+            "bottom.tga",
+            "right.tga",
+            "left.tga",
+    };
     int width, height, nrChannels;
-    for (std::vector<std::string>::size_type i = 0; i < faces.size(); i++) {
+    for (std::vector<std::string>::size_type i = 0; i < faces.size(); ++i) {
         unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
         if (data) {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB,
@@ -83,15 +89,8 @@ Cube::Cube(
             1.0f, -1.0f, 1.0f
     };
 
-    std::vector<std::string> faces{
-            "front.tga",
-            "back.tga",
-            "top.tga",
-            "bottom.tga",
-            "right.tga",
-            "left.tga",
-    };
-    texture = loadTexture(faces);
+    glGenTextures(1, &texture);
+    loadTexture(texture);
 
     constructorBegin();
 
@@ -105,12 +104,16 @@ Cube::Cube(
 }
 
 void Cube::Draw(const GLfloat time, GLfloat) noexcept {
-    glDepthMask(GL_FALSE);
     drawBegin();
 
+    glDepthMask(GL_FALSE);
     glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
     glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
+    glDepthMask(GL_TRUE);
 
     drawEnd();
-    glDepthMask(GL_TRUE);
+}
+
+Cube::~Cube() {
+    glDeleteTextures(1, &texture);
 }

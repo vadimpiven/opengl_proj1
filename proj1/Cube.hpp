@@ -12,6 +12,8 @@ public:
          const glm::mat4 *, const glm::mat4 *) noexcept;
 
     void Draw(GLfloat, GLfloat) noexcept override;
+
+    ~Cube() override;
 };
 
 #endif //OPENGL_CUBE_HPP

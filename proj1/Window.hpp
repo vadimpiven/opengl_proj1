@@ -22,6 +22,8 @@ public:
 
     void SetKeyCallback(GLFWkeyfun) noexcept;
 
+    void SetMouseButtonCallback(GLFWmousebuttonfun) noexcept;
+
     void SetCursorPosCallback(GLFWcursorposfun) noexcept;
 
     void Loop(void(*)(GLfloat, GLfloat)) noexcept;

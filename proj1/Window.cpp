@@ -69,8 +69,12 @@ void Window::SetKeyCallback(GLFWkeyfun callback) noexcept {
     glfwSetKeyCallback(window, callback); // listen for user actions
 }
 
+void Window::SetMouseButtonCallback(GLFWmousebuttonfun callback) noexcept {
+    glfwSetMouseButtonCallback(window, callback); // listen for user actions
+}
+
 void Window::SetCursorPosCallback(GLFWcursorposfun callback) noexcept {
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // capture cursor
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL); // capture cursor
     glfwSetCursorPosCallback(window, callback); // listen for user actions
 }
 

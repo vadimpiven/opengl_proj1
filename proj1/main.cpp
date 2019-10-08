@@ -12,26 +12,50 @@ struct objectStorage {
     Object *object;
 };
 
-const GLsizei WIDTH = 800, HEIGHT = 600;
+GLsizei WIDTH = 800, HEIGHT = 600;
 glm::mat4 VIEW, PROJECTION;
 std::vector<Shader *> SH;
 std::vector<objectStorage *> OBJ;
 Camera *CAMERA;
 std::array<bool, 1024> KEYS;
+std::array<bool, 8> MOUSE;
 
-void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
+void windowCallback(GLFWwindow *, int width, int height) {
+    WIDTH = width;
+    HEIGHT = height;
+}
+
+void mouseCallback(GLFWwindow *, int button, int action, int) {
+    if (button >= 0 && button < 8) {
+        if (action == GLFW_PRESS) {
+            MOUSE[button] = true;
+        } else if (action == GLFW_RELEASE) {
+            MOUSE[button] = false;
+        }
+    }
+}
+
+void cursorCallback(GLFWwindow *window, double xpos, double ypos) {
     static bool firstMouse = true;
     static GLfloat lastX = 400, lastY = 300;
-    if(firstMouse) {
+    static GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+
+    if (MOUSE[GLFW_MOUSE_BUTTON_LEFT]) {
+        if (firstMouse) {
+            lastX = xpos;
+            lastY = ypos;
+            firstMouse = false;
+            glfwSetCursor(window, cursor);
+        }
+
+        CAMERA->ProcessMouseMovement(xpos - lastX, lastY - ypos);
+
         lastX = xpos;
         lastY = ypos;
-        firstMouse = false;
+    } else if (!firstMouse) {
+        firstMouse = true;
+        glfwSetCursor(window, nullptr);
     }
-
-    CAMERA->ProcessMouseMovement(xpos - lastX, lastY - ypos);
-
-    lastX = xpos;
-    lastY = ypos;
 }
 
 void keyCallback(GLFWwindow *window, GLint key, GLint, GLint action, GLint) noexcept {
@@ -39,31 +63,40 @@ void keyCallback(GLFWwindow *window, GLint key, GLint, GLint action, GLint) noex
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GL_TRUE);
     } else if (key >= 0 && key < 1024) {
-        if(action == GLFW_PRESS)
+        if (action == GLFW_PRESS) {
             KEYS[key] = true;
-        else if(action == GLFW_RELEASE)
+        } else if (action == GLFW_RELEASE) {
             KEYS[key] = false;
+        }
     }
 }
 
-void DoMovement(const GLfloat delta) {
-    if(KEYS[GLFW_KEY_W])
+void moveCamera(const GLfloat delta) {
+    if (KEYS[GLFW_KEY_W]) {
         CAMERA->ProcessKeyboard(CameraMovement::FORWARD, delta);
-    if(KEYS[GLFW_KEY_S])
+    }
+    if (KEYS[GLFW_KEY_S]) {
         CAMERA->ProcessKeyboard(CameraMovement::BACKWARD, delta);
-    if(KEYS[GLFW_KEY_A])
+    }
+    if (KEYS[GLFW_KEY_A]) {
         CAMERA->ProcessKeyboard(CameraMovement::LEFT, delta);
-    if(KEYS[GLFW_KEY_D])
+    }
+    if (KEYS[GLFW_KEY_D]) {
         CAMERA->ProcessKeyboard(CameraMovement::RIGHT, delta);
-    if(KEYS[GLFW_KEY_SPACE])
+    }
+    if (KEYS[GLFW_KEY_SPACE]) {
         CAMERA->ProcessKeyboard(CameraMovement::UP, delta);
-    if(KEYS[GLFW_KEY_LEFT_SHIFT])
+    }
+    if (KEYS[GLFW_KEY_LEFT_SHIFT]) {
         CAMERA->ProcessKeyboard(CameraMovement::DOWN, delta);
+    }
 }
 
 void redraw(const GLfloat time, const GLfloat delta) noexcept {
+    PROJECTION = glm::perspective(45.0f, (float) WIDTH / (float) HEIGHT, 0.1f, 1000.0f);
+
     // move camera
-    DoMovement(delta);
+    moveCamera(delta);
     VIEW = CAMERA->GetViewMatrix();
 
     // clear window with given color
@@ -81,8 +114,10 @@ int main() {
     PROJECTION = glm::perspective(45.0f, (float) WIDTH / (float) HEIGHT, 0.1f, 1000.0f);
     CAMERA = new Camera();
     VIEW = CAMERA->GetViewMatrix();
+    w.SetWindowSizeCallback(windowCallback);
     w.SetKeyCallback(keyCallback);
-    w.SetCursorPosCallback(mouseCallback);
+    w.SetMouseButtonCallback(mouseCallback);
+    w.SetCursorPosCallback(cursorCallback);
 
     // initialise shaders
     SH.resize(2);
