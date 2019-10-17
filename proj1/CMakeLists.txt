@@ -15,11 +15,11 @@ add_custom_target("${PROJECT_NAME}_shaders"
         VERBATIM)
 
 # compile sources
-file(GLOB SOURCES *.cpp)
+file(GLOB SOURCES *.cpp *.hpp)
 if(MSVC) # get rid of console window if compiling on Windows with Visual Studio
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /entry:mainCRTStartup")
 endif(MSVC)
-add_executable("${PROJECT_NAME}" WIN32 "${SOURCES}" Cube.cpp Cube.hpp)
+add_executable("${PROJECT_NAME}" WIN32 "${SOURCES}")
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
 
 # tinyobjloader - loads .obj 3d mdels
