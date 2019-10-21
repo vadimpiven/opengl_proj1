@@ -20,9 +20,8 @@ Camera *CAMERA;
 std::array<bool, 1024> KEYS;
 std::array<bool, 8> MOUSE;
 
-void windowCallback(GLFWwindow *, int width, int height) {
-    WIDTH = width;
-    HEIGHT = height;
+void windowCallback(GLFWwindow *window, int, int) {
+    glfwGetFramebufferSize(window, &WIDTH, &HEIGHT);
 }
 
 void mouseCallback(GLFWwindow *, int button, int action, int) {
@@ -38,20 +37,20 @@ void mouseCallback(GLFWwindow *, int button, int action, int) {
 void cursorCallback(GLFWwindow *window, double xpos, double ypos) {
     static bool firstMouse = true;
     static GLfloat lastX = 400, lastY = 300;
-    static GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+    static GLFWcursor *cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
 
     if (MOUSE[GLFW_MOUSE_BUTTON_LEFT]) {
         if (firstMouse) {
-            lastX = xpos;
-            lastY = ypos;
+            lastX = (GLfloat) xpos;
+            lastY = (GLfloat) ypos;
             firstMouse = false;
             glfwSetCursor(window, cursor);
         }
 
-        CAMERA->ProcessMouseMovement(xpos - lastX, lastY - ypos);
+        CAMERA->ProcessMouseMovement((GLfloat) xpos - lastX, lastY - (GLfloat) ypos);
 
-        lastX = xpos;
-        lastY = ypos;
+        lastX = (GLfloat) xpos;
+        lastY = (GLfloat) ypos;
     } else if (!firstMouse) {
         firstMouse = true;
         glfwSetCursor(window, nullptr);
@@ -93,6 +92,7 @@ void moveCamera(const GLfloat delta) {
 }
 
 void redraw(const GLfloat time, const GLfloat delta) noexcept {
+    glViewport(0, 0, WIDTH, HEIGHT);
     PROJECTION = glm::perspective(45.0f, (float) WIDTH / (float) HEIGHT, 0.1f, 1000.0f);
 
     // move camera
@@ -101,7 +101,8 @@ void redraw(const GLfloat time, const GLfloat delta) noexcept {
 
     // clear window with given color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClear(static_cast<GLbitfield>(GL_COLOR_BUFFER_BIT) |
+            static_cast<GLbitfield>(GL_DEPTH_BUFFER_BIT) | static_cast<GLbitfield>(GL_STENCIL_BUFFER_BIT));
 
     // draw everything
     for (const auto &o: OBJ) { o->object->Draw(time, delta); }
@@ -110,7 +111,7 @@ void redraw(const GLfloat time, const GLfloat delta) noexcept {
 
 int main() {
     // create window
-    Window w(WIDTH, HEIGHT, "OpenGL Project One"); // create new window
+    Window w(&WIDTH, &HEIGHT, "OpenGL Project One"); // create new window
     PROJECTION = glm::perspective(45.0f, (float) WIDTH / (float) HEIGHT, 0.1f, 1000.0f);
     CAMERA = new Camera();
     VIEW = CAMERA->GetViewMatrix();

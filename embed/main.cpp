@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <fstream>
 #include <string>
 #include <cctype>
@@ -45,9 +46,6 @@ int main(int argc, char *argv[]) {
     string list = argv[1];
     list += ';'; // add ending separator
 
-    // locale to allow only english letters in names
-    setlocale(LC_ALL, "en_US.utf-8");
-
     ofstream out("Shader.hpp");
     out << "#ifndef OPENGL_SHADER_HPP" << endl;
     out << "#define OPENGL_SHADER_HPP" << endl;
@@ -67,7 +65,7 @@ int main(int argc, char *argv[]) {
         string name = filename.substr(pos1 + 1, pos2 - pos1 - 1);
         string ext = filename.substr(pos2 + 1);
         if (!all_of(name.begin(), name.end(), [](char c) {
-            return isalpha(c) || isnumber(c) || c == '_';
+            return isalpha(c) || isdigit(c) || c == '_';
         })) { continue; }
         else {
             transform(name.begin(), name.end(), name.begin(),

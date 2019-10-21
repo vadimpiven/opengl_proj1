@@ -13,10 +13,10 @@ class Window {
 
     static void initGLEW() noexcept;
 
-    void resizeWindow() noexcept;
+    void resizeWindow(GLsizei *, GLsizei *) noexcept;
 
 public:
-    Window(GLsizei, GLsizei, const char *) noexcept;
+    Window(GLsizei *, GLsizei *, const char *) noexcept;
 
     void SetWindowSizeCallback(GLFWwindowsizefun) noexcept;
 

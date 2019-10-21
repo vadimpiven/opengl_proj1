@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include <cmath>
 
 #include "Cone.hpp"
@@ -53,8 +54,8 @@ Cone::Cone(
         const glm::mat4 *const projection
 ) noexcept
         : Object(shaderProgram, placement, view, projection) {
-    const GLfloat h = 0.6, r = 0.5;
-    const unsigned n = 120, s = 6;
+    const GLfloat h = 0.6f, r = 0.5f;
+    const unsigned long long n = 120, s = 6;
     vertices.resize(s * (n + 2));
     indices.resize(3 * (n * 2));
 
@@ -82,7 +83,7 @@ Cone::Cone(
     vertices[s * 2 + 4] = 0;
     vertices[s * 2 + 5] = 0;
 
-    float angle = (2 * M_PI) / n;
+    float angle = (2.f * (float) M_PI) / (float) n;
     unsigned j = 0;
     glm::dvec3 color;
     for (unsigned i = 3; i < n + 2; ++i) {
@@ -91,9 +92,9 @@ Cone::Cone(
         vertices[s * i + 0] = r * cos(angle);
         vertices[s * i + 1] = h;
         vertices[s * i + 2] = r * sin(angle);
-        vertices[s * i + 3] = color.r;
-        vertices[s * i + 4] = color.g;
-        vertices[s * i + 5] = color.b;
+        vertices[s * i + 3] = (GLfloat) color.r;
+        vertices[s * i + 4] = (GLfloat) color.g;
+        vertices[s * i + 5] = (GLfloat) color.b;
 
         indices[j++] = 0;
         indices[j++] = i - 1;
@@ -103,7 +104,7 @@ Cone::Cone(
         indices[j++] = i - 1;
         indices[j++] = i;
 
-        angle += (2 * M_PI) / n;
+        angle += (2.f * (float) M_PI) / (float) n;
     }
 
     indices[j++] = 0;
@@ -133,7 +134,7 @@ void Cone::Draw(const GLfloat time, GLfloat) noexcept {
 
     drawBegin();
 
-    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (GLvoid *) (0 * sizeof(indices[0])));
+    glDrawElements(GL_TRIANGLES, (GLsizei) indices.size(), GL_UNSIGNED_INT, (GLvoid *) (0 * sizeof(indices[0])));
 
     drawEnd();
 }

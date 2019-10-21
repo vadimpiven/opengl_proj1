@@ -33,28 +33,33 @@ void Window::initGLEW() noexcept {
     if (glewInit() != GLEW_OK) { errorOccurred("GLEW initialisation failed"); }
 }
 
-void Window::resizeWindow() noexcept {
-    GLint width, height;
-    glfwGetFramebufferSize(window, &width, &height); // get actual window size
-    glViewport(0, 0, width, height); // set window position and size
-    glEnable(GL_DEPTH_TEST); // enable depth check (for correct 3D redraw)
-    glEnable(GL_STENCIL_TEST); // enable stencil check
+void Window::resizeWindow(GLsizei *width, GLsizei *height) noexcept {
+    // get actual window size and properly resize canvas
+    glfwGetFramebufferSize(window, width, height);
+    glViewport(0, 0, *width, *height);
+    // enable all checks for correct multilayer redraw
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
     // smoothing
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_LINE_SMOOTH);
     glEnable(GL_POLYGON_SMOOTH);
     glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
     glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+    // enable correct alpha channel
+    // WARNING!
+    // transparent primitives must be sorted from farthest to nearest
+    // and drawn only when all opaque objects are already depicted
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-Window::Window(const GLsizei width, const GLsizei height, const char *title) noexcept {
+Window::Window(GLsizei *width, GLsizei *height, const char *title) noexcept {
     initGLFW(); // allows to create window
     glfwSwapInterval(1); // enable vertical synchronisation
     window = glfwCreateWindow(
-            width, // WIDTH
-            height, // height
+            *width, // WIDTH
+            *height, // height
             title, // title
             nullptr, // monitor where window is shown
             nullptr // window to share the context with
@@ -63,12 +68,11 @@ Window::Window(const GLsizei width, const GLsizei height, const char *title) noe
 
     glfwMakeContextCurrent(window); // create context for window
     initGLEW(); // allows to use OpenGL
-    resizeWindow();
+    resizeWindow(width, height);
 }
 
 void Window::SetWindowSizeCallback(GLFWwindowsizefun callback) noexcept {
-    // make window resizable
-    glfwSetWindowAttrib(window, GLFW_RESIZABLE, GLFW_TRUE);
+    glfwSetWindowAttrib(window, GLFW_RESIZABLE, GLFW_TRUE); // make window resizable
     glfwSetWindowSizeCallback(window, callback); // listen for user actions
 }
 
