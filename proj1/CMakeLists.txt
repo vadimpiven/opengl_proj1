@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 # generates Shaders.hpp containing all shaders from ./shaders as string literals
 file(GLOB SHADERS shaders/*.vert shaders/*.frag)
-add_subdirectory(../embed "${PROJECT_BINARY_DIR}/embed")
 add_custom_target("${PROJECT_NAME}_shaders"
         COMMAND embed_shaders "${SHADERS}"
         BYPRODUCTS Shader.hpp
@@ -23,7 +22,6 @@ add_executable("${PROJECT_NAME}" WIN32 "${SOURCES}")
 add_dependencies("${PROJECT_NAME}" "${PROJECT_NAME}_shaders")
 
 # tinyobjloader - loads .obj 3d mdels
-add_subdirectory(../tinyobjloader "${PROJECT_BINARY_DIR}/tinyobjloader")
 target_include_directories("${PROJECT_NAME}" PRIVATE ../tinyobjloader)
 target_link_libraries("${PROJECT_NAME}" tinyobjloader)
 
@@ -31,9 +29,6 @@ target_link_libraries("${PROJECT_NAME}" tinyobjloader)
 target_include_directories("${PROJECT_NAME}" PRIVATE  ../stb)
 
 # GLM - GLSL-like types
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-set(GLM_TEST_ENABLE OFF CACHE BOOL "" FORCE)
-add_subdirectory(../glm "${PROJECT_BINARY_DIR}/glm")
 target_include_directories("${PROJECT_NAME}" PRIVATE ../glm/glm)
 target_link_libraries("${PROJECT_NAME}" glm_static)
 
@@ -43,18 +38,10 @@ target_include_directories("${PROJECT_NAME}" PRIVATE "${OPENGL_INCLUDE_DIRS}")
 target_link_libraries("${PROJECT_NAME}" "${OPENGL_LIBRARIES}")
 
 # GLEW - load OpenGl
-set(glew-cmake_BUILD_SHARED OFF CACHE BOOL "" FORCE)
-set(glew-cmake_BUILD_MULTI_CONTEXT OFF CACHE BOOL "" FORCE)
-add_subdirectory(../glew "${PROJECT_BINARY_DIR}/glew")
 target_include_directories("${PROJECT_NAME}" PRIVATE ../glew/include)
 target_link_libraries("${PROJECT_NAME}" libglew_static)
 
 # GLFW - create window and context for OpenGL
-set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-add_subdirectory(../glfw "${PROJECT_BINARY_DIR}/glfw")
 target_link_libraries("${PROJECT_NAME}" glfw)
 
 # copy resources
