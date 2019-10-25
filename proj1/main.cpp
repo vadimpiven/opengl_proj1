@@ -91,7 +91,7 @@ void moveCamera(const GLfloat delta) {
     }
 }
 
-void redraw(const GLfloat time, const GLfloat delta) noexcept {
+void redraw(const GLfloat delta) noexcept {
     glViewport(0, 0, WIDTH, HEIGHT);
     PROJECTION = glm::perspective(45.0f, (float) WIDTH / (float) HEIGHT, 0.1f, 1000.0f);
 
@@ -105,7 +105,7 @@ void redraw(const GLfloat time, const GLfloat delta) noexcept {
             static_cast<GLbitfield>(GL_DEPTH_BUFFER_BIT) | static_cast<GLbitfield>(GL_STENCIL_BUFFER_BIT));
 
     // draw everything
-    for (const auto &o: OBJ) { o->object->Draw(time, delta); }
+    for (const auto &o: OBJ) { o->object->Draw(delta); }
     glCheckErrors();
 }
 

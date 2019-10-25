@@ -9,7 +9,7 @@ public:
     Cone(const Shader *, const glm::mat4 *,
          const glm::mat4 *, const glm::mat4 *) noexcept;
 
-    void Draw(GLfloat, GLfloat) noexcept override;
+    void Draw(GLfloat) noexcept override;
 };
 
 #endif //OPENGL_CONE_HPP

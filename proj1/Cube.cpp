@@ -104,7 +104,7 @@ Cube::Cube(
     constructorEnd();
 }
 
-void Cube::Draw(const GLfloat time, GLfloat) noexcept {
+void Cube::Draw(GLfloat) noexcept {
     drawBegin();
 
     glDepthMask(GL_FALSE);

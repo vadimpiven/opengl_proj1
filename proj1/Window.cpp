@@ -89,7 +89,7 @@ void Window::SetCursorPosCallback(GLFWcursorposfun callback) noexcept {
     glfwSetCursorPosCallback(window, callback); // listen for user actions
 }
 
-void Window::Loop(void(*redraw)(GLfloat, GLfloat)) noexcept {
+void Window::Loop(void(*redraw)(GLfloat)) noexcept {
     GLfloat deltaTime = 0.0f, lastFrame = 0.0f, currentFrame;
 
     while (!glfwWindowShouldClose(window)) { // while window is not closed
@@ -98,7 +98,7 @@ void Window::Loop(void(*redraw)(GLfloat, GLfloat)) noexcept {
         lastFrame = currentFrame;
 
         glfwPollEvents(); // check for user actions
-        redraw(currentFrame, deltaTime); // update image
+        redraw(deltaTime); // update image
         glfwSwapBuffers(window); // show new image
     }
 }

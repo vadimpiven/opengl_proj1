@@ -46,7 +46,7 @@ public:
            const glm::mat4 *, const glm::mat4 *) noexcept;
 
     virtual
-    void Draw(GLfloat, GLfloat) noexcept = 0;
+    void Draw(GLfloat) noexcept = 0;
 
     virtual
     ~Object() noexcept;

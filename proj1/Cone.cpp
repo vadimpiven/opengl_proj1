@@ -129,8 +129,8 @@ Cone::Cone(
     constructorEnd();
 }
 
-void Cone::Draw(const GLfloat time, GLfloat) noexcept {
-    model = glm::rotate(glm::mat4(1.0f), time * -0.5f, glm::vec3(0.0, 1.0, 0.0));
+void Cone::Draw(const GLfloat delta) noexcept {
+    model = glm::rotate(model, delta * -0.5f, glm::vec3(0.0, 1.0, 0.0));
 
     drawBegin();
 

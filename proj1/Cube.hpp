@@ -11,7 +11,7 @@ public:
     Cube(const Shader *, const glm::mat4 *,
          const glm::mat4 *, const glm::mat4 *) noexcept;
 
-    void Draw(GLfloat, GLfloat) noexcept override;
+    void Draw(GLfloat) noexcept override;
 
     ~Cube() override;
 };
