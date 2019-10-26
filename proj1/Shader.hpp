@@ -34,6 +34,32 @@ public:
     ~Shader() noexcept;
 };
 
+const GLchar FRAG_FPS[] = R"~(
+#version 330 core
+
+out vec4 color;
+
+in vec2 TexCoords;
+
+uniform sampler2D ourTexture;
+
+void main() {
+    color = texture(ourTexture, TexCoords);
+})~";
+
+const GLchar VERT_FPS[] = R"~(
+#version 330 core
+
+layout (location = 0) in vec2 inXY;
+layout (location = 1) in vec2 texXY;
+
+out vec2 TexCoords;
+
+void main() {
+    gl_Position = vec4(inXY, 0.0f, 1.0f);
+    TexCoords = texXY;
+})~";
+
 const GLchar FRAG_RGB[] = R"~(
 #version 330 core
 

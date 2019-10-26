@@ -6,6 +6,7 @@
 #include "Error.hpp"
 #include "Cone.hpp"
 #include "Cube.hpp"
+#include "FPS.hpp"
 
 struct objectStorage {
     glm::mat4 placement;
@@ -16,6 +17,7 @@ GLsizei WIDTH = 800, HEIGHT = 600;
 glm::mat4 VIEW, PROJECTION;
 std::vector<Shader *> SH;
 std::vector<objectStorage *> OBJ;
+FPS *fps;
 Camera *CAMERA;
 std::array<bool, 1024> KEYS;
 std::array<bool, 8> MOUSE;
@@ -94,6 +96,7 @@ void moveCamera(const GLfloat delta) {
 void redraw(const GLfloat delta) noexcept {
     glViewport(0, 0, WIDTH, HEIGHT);
     PROJECTION = glm::perspective(45.0f, (float) WIDTH / (float) HEIGHT, 0.1f, 1000.0f);
+    fps->Resize(WIDTH, HEIGHT);
 
     // move camera
     moveCamera(delta);
@@ -106,6 +109,7 @@ void redraw(const GLfloat delta) noexcept {
 
     // draw everything
     for (const auto &o: OBJ) { o->object->Draw(delta); }
+    fps->Draw(delta);
     glCheckErrors();
 }
 
@@ -121,9 +125,10 @@ int main() {
     w.SetCursorPosCallback(cursorCallback);
 
     // initialise shaders
-    SH.resize(2);
+    SH.resize(3);
     SH[0] = new Shader(VERT_SKYBOX, FRAG_SKYBOX);
     SH[1] = new Shader(VERT_XYZ_RGB, FRAG_RGB);
+    SH[2] = new Shader(VERT_FPS, FRAG_FPS);
 
     // initialise objects
     glm::mat4 placement;
@@ -145,6 +150,9 @@ int main() {
     OBJ.back()->placement = placement;
     OBJ.back()->object = new Cone(SH[1], &(OBJ.back()->placement), &VIEW, &PROJECTION);
 
+    // fps display
+    fps = new FPS(SH[2], WIDTH, HEIGHT);
+
     // main loop
     w.Loop(redraw); // infinite loop while window is open
 
@@ -153,6 +161,7 @@ int main() {
         delete o->object;
         delete o;
     }
+    delete fps;
     for (const auto &s: SH) { delete s; }
 
     w.Destroy();

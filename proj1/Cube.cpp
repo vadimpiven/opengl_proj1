@@ -6,8 +6,8 @@
 #include "stb_image.h"
 #include "Cube.hpp"
 
-unsigned int loadTexture(GLuint textureID) {
-    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+void Cube::loadTexture() noexcept(false) {
+    glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
     // any from http://www.custommapmakers.org/skyboxes.php
     std::vector<std::string> faces{
@@ -36,7 +36,7 @@ unsigned int loadTexture(GLuint textureID) {
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-    return textureID;
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
 Cube::Cube(
@@ -91,7 +91,7 @@ Cube::Cube(
     };
 
     glGenTextures(1, &texture);
-    loadTexture(texture);
+    loadTexture();
 
     constructorBegin();
 
@@ -109,12 +109,13 @@ void Cube::Draw(GLfloat) noexcept {
 
     glDepthMask(GL_FALSE);
     glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
-    glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
     glDepthMask(GL_TRUE);
 
     drawEnd();
 }
 
-Cube::~Cube() {
+Cube::~Cube() noexcept {
     glDeleteTextures(1, &texture);
 }

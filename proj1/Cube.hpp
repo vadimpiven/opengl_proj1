@@ -6,6 +6,8 @@
 class Cube : public Object {
     GLuint texture;
 
+    void loadTexture() noexcept(false);
+
 public:
     explicit
     Cube(const Shader *, const glm::mat4 *,
@@ -13,7 +15,7 @@ public:
 
     void Draw(GLfloat) noexcept override;
 
-    ~Cube() override;
+    ~Cube() noexcept override;
 };
 
 #endif //OPENGL_CUBE_HPP
